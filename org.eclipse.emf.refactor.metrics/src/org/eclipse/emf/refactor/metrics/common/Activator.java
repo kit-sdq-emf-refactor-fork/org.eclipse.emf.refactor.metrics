@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics;
+package org.eclipse.emf.refactor.metrics.common;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
