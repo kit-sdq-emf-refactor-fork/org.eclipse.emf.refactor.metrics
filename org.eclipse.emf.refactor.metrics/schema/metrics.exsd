@@ -97,7 +97,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.metrics.interfaces.IMetricCalculateClass"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.refactor.metrics.interfaces.IMetricCalculator"/>
                </appinfo>
             </annotation>
          </attribute>
