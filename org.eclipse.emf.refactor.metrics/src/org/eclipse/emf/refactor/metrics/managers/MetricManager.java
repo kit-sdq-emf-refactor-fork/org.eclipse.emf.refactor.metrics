@@ -16,6 +16,7 @@ public class MetricManager {
 	 */
 	public MetricManager() {
 		allMetrics = MetricLoader.loadMetrics();
+//		System.out.println("MetricManager initialized!");
 	}
 	
 	
