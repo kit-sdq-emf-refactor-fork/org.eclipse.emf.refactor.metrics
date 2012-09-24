@@ -25,6 +25,7 @@ public class ConfigurationManager {
 	public ConfigurationManager() {
 		configurations = new LinkedList<Configuration>();
 		allMetrics = MetricManager.getAllMetrics();
+//		System.out.println("ConfigurationManager initialized!");
 	}
 	
 	
@@ -82,7 +83,7 @@ public class ConfigurationManager {
 
 	private static Configuration getConfiguration(IProject project) {
 		Configuration configuration = null;
-		if(!configurations.isEmpty()) {
+		if(! configurations.isEmpty()) {
 			for (Configuration tempConfiguration : configurations) {
 				if (tempConfiguration.getProject().equals(project))
 					configuration=tempConfiguration;
