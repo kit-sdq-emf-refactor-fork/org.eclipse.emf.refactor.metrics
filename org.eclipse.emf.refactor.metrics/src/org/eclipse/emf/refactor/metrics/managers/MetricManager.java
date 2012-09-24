@@ -11,6 +11,13 @@ public class MetricManager {
 	
 	private static LinkedList<Metric> allMetrics = null;
 	
+	/**
+	 * The constructor that creates a new <i>MetricManager</i> controller class.
+	 */
+	public MetricManager() {
+		allMetrics = MetricLoader.loadMetrics();
+	}
+	
 	
 	public static LinkedList<Metric> getAllMetrics() {
 		if (allMetrics == null) {
