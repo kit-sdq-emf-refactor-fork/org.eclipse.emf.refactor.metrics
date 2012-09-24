@@ -84,13 +84,6 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="metric_value_type" type="string">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
          <attribute name="metric_calculate_class" type="string" use="required">
             <annotation>
                <documentation>
