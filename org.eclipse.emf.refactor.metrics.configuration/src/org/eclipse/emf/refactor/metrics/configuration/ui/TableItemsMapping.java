@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.configuration;
+package org.eclipse.emf.refactor.metrics.configuration.ui;
 
 import java.util.LinkedList;
 

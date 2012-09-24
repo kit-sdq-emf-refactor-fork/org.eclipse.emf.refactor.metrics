@@ -1,14 +1,14 @@
-package org.eclipse.emf.refactor.metrics.configuration;
+package org.eclipse.emf.refactor.metrics.configuration.core;
 
 import java.util.LinkedList;
 
 import org.eclipse.emf.refactor.metrics.core.Metric;
 
-class SortedMetricsList {
+public class SortedMetricsList {
 
 	private LinkedList<LinkedList<LinkedList<Metric>>> metricsList;
 
-	protected SortedMetricsList(LinkedList<Metric> rawMetricsList) {
+	public SortedMetricsList(LinkedList<Metric> rawMetricsList) {
 		metricsList = new LinkedList<LinkedList<LinkedList<Metric>>>();
 		for (int position = 0; position < rawMetricsList.size(); position++) {
 			addMetricToList(rawMetricsList.get(position));
@@ -23,7 +23,7 @@ class SortedMetricsList {
 		return metricsList.get(index);
 	}
 	
-	protected LinkedList<LinkedList<LinkedList<Metric>>> getMetricsList() {
+	public LinkedList<LinkedList<LinkedList<Metric>>> getMetricsList() {
 		return metricsList;
 	}
 

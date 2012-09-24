@@ -1,5 +1,6 @@
 package org.eclipse.emf.refactor.metrics.configuration;
 
+import org.eclipse.emf.refactor.metrics.configuration.managers.ConfigurationManager;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 

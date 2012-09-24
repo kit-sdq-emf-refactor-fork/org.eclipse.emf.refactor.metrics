@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.ui.propertyPages">
       <page
-            class="org.eclipse.emf.refactor.metrics.configuration.MetricsConfigurationPage"
+            class="org.eclipse.emf.refactor.metrics.configuration.ui.MetricsConfigurationPage"
             id="org.eclipse.emf.refactor.metrics.configuration"
             name="Metrics configuration">
       </page>
@@ -12,7 +12,7 @@
       <extension
          point="org.eclipse.ui.propertyPages">
       <page
-            class="org.eclipse.emf.refactor.metrics.configuration.MetricsConfigurationPage"
+            class="org.eclipse.emf.refactor.metrics.configuration.ui.MetricsConfigurationPage"
             id="org.eclipse.emf.refactor.metrics.configuration"
             name="Metrics configuration">
       </page>

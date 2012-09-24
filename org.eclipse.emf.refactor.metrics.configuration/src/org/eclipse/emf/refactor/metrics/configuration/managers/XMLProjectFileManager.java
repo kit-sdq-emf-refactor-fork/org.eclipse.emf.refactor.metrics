@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.configuration;
+package org.eclipse.emf.refactor.metrics.configuration.managers;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.refactor.metrics.configuration.core.Configuration;
 import org.eclipse.emf.refactor.metrics.core.Metric;
 import org.eclipse.emf.refactor.metrics.managers.XMLManager;
 import org.w3c.dom.Document;

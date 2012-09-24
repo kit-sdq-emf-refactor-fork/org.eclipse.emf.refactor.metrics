@@ -1,8 +1,9 @@
-package org.eclipse.emf.refactor.metrics.configuration;
+package org.eclipse.emf.refactor.metrics.configuration.managers;
 
 import java.util.LinkedList;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.refactor.metrics.configuration.core.Configuration;
 import org.eclipse.emf.refactor.metrics.core.Metric;
 import org.eclipse.emf.refactor.metrics.managers.MetricManager;
 
