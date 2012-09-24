@@ -1,8 +1,9 @@
-package org.eclipse.emf.refactor.metrics;
+package org.eclipse.emf.refactor.metrics.core;
 
 import java.util.LinkedList;
 
 import org.eclipse.emf.refactor.metrics.interfaces.IMetricCalculator;
+import org.eclipse.emf.refactor.metrics.managers.MetricManager;
 
 /**
  * This class provides a container for the metrics.

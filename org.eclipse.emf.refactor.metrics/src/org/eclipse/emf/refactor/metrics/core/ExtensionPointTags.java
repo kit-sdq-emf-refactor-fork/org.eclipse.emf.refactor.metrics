@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics;
+package org.eclipse.emf.refactor.metrics.core;
 
 public class ExtensionPointTags {
 
