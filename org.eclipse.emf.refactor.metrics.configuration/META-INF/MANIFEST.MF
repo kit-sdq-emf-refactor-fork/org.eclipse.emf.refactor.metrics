@@ -5,6 +5,9 @@ Bundle-SymbolicName: org.eclipse.emf.refactor.metrics.configuration;singleton:=t
 Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: org.eclipse.emf.refactor.metrics.configuration.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.jdt.core;bundle-version="3.8.1",
+ org.eclipse.core.resources;bundle-version="3.8.0",
+ org.eclipse.emf.refactor.metrics;bundle-version="0.7.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
