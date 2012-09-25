@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="org.eclipse.emf.refactor.qa.menu"
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               id="org.eclipse.emf.refactor.runtime.menu"
+               label="EMF Quality Assurance">
+            <command
+                  commandId="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsOnElementCommand"
+                  label="Calculate Configured Metrics (on element)"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="true">
+                  <iterate
+                        ifEmpty="false">
+                     <instanceof
+                           value="org.eclipse.emf.ecore.EObject">
+                     </instanceof>
+                  </iterate>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsTransitivelyCommand"
+                  label="Calculate Configured Metrics (transitively)"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="true">
+                  <iterate
+                        ifEmpty="false">
+                     <instanceof
+                           value="org.eclipse.emf.ecore.EObject">
+                     </instanceof>
+                  </iterate>
+               </visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsOnElementCommand"
+            name="CalculateMetricsOnElementCommand">
+      </command>
+      <command
+            id="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsTransitivelyCommand"
+            name="CalculateMetricsTransitivelyCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.emf.refactor.metrics.runtime.CalculateMetricsOnElementCommandHandler"
+            commandId="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsOnElementCommand">
+      </handler>
+      <handler
+            class="org.eclipse.emf.refactor.metrics.runtime.CalculateMetricsTransitivelyCommandHandler"
+            commandId="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsTransitivelyCommand">
+      </handler>
+   </extension>
+   
+
+</plugin>
