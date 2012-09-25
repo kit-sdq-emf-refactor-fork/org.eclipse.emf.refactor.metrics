@@ -11,14 +11,19 @@ public class MetricManager {
 	
 	private static LinkedList<Metric> allMetrics = null;
 	
-	/**
-	 * The constructor that creates a new <i>MetricManager</i> controller class.
-	 */
-	public MetricManager() {
+	private static MetricManager instance;
+	
+	private MetricManager() {
 		allMetrics = MetricLoader.loadMetrics();
-//		System.out.println("MetricManager initialized!");
+		System.out.println("MetricManager initialized!");
 	}
 	
+	public static MetricManager getInstance() {
+		if (instance == null) {
+			instance = new MetricManager();
+		}
+		return instance;
+	}
 	
 	public static LinkedList<Metric> getAllMetrics() {
 		if (allMetrics == null) {
