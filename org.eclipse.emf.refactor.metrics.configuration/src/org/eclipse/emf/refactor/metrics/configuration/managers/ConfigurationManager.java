@@ -19,16 +19,20 @@ public class ConfigurationManager {
 	private static LinkedList<Configuration> configurations;
 	private static LinkedList<Metric> allMetrics = null;
 	
+	private static ConfigurationManager instance;
 	
-	/**
-	 * The constructor that creates a new <i>ConfigurationManager</i> controller class.
-	 */
-	public ConfigurationManager() {
+	private ConfigurationManager() {
 		configurations = new LinkedList<Configuration>();
 		allMetrics = MetricManager.getAllMetrics();
-//		System.out.println("ConfigurationManager initialized!");
+		System.out.println("ConfigurationManager initialized!");
 	}
 	
+	public static ConfigurationManager getInstance() {
+		if (instance == null) {
+			instance = new ConfigurationManager();
+		}
+		return instance;
+	}
 	
 	/**
 	 * Returns an <i>String</i> array containing the names of all supported operations.
