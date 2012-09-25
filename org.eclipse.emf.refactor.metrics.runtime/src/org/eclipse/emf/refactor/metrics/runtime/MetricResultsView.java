@@ -1,24 +1,196 @@
 package org.eclipse.emf.refactor.metrics.runtime;
 
+import java.util.List;
+
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 public class MetricResultsView extends ViewPart {
+	
+	private static final String RESULT_COLUMN_LABEL = "Result";
 
-	public MetricResultsView() {
-		// TODO Auto-generated constructor stub
+	private static final String DESCRIPTION_COLUMN_LABEL = "Description";
+
+	private static final String METRIC_COLUMN_LABEL = "Metric";
+
+	private static final String CONTEXT_COLUMN_LABEL = "Context";
+
+	private static final String TIME_COLUMN_LABEL = "Time";
+
+	/**
+	 * The ID of the view as specified by the extension.
+	 */
+	public static final String ID = "org.eclipse.emf.refactor.metrics.view";
+	private TableViewer viewer;
+	private Composite parent;
+	private SaveAction saveAction;
+	private Action clearAction;
+
+	public MetricResultsView() { }
+	
+	@Override
+	public void setFocus() {
+		viewer.getControl().setFocus();
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
-		// TODO Auto-generated method stub
-
+		this.parent = parent;
+		TableColumn column;
+		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL);
+		final Table table = viewer.getTable();
+		EMFMetrics.setResultsViewer(viewer);
+		column = new TableColumn(table, SWT.LEFT);
+		column.setText(TIME_COLUMN_LABEL);
+		column.setWidth(150);
+		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		column = new TableColumn(table, SWT.LEFT);
+		column.setText(CONTEXT_COLUMN_LABEL);
+		column.setWidth(200);
+		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		column = new TableColumn(table, SWT.LEFT);
+		column.setText(METRIC_COLUMN_LABEL);
+		column.setWidth(200);
+		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		column = new TableColumn(table, SWT.LEFT);
+		column.setText(DESCRIPTION_COLUMN_LABEL);
+		column.setWidth(300);
+		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		column = new TableColumn(table, SWT.LEFT);
+		column.setText(RESULT_COLUMN_LABEL);
+		column.setWidth(50);
+		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		viewer.setContentProvider(new MetricResultsViewContentProvider());
+		viewer.setLabelProvider(new MetricResultsViewLabelProvider());
+		viewer.setInput(EMFMetrics.getResultsViewInput());
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(),"EMFMetrics.viewer");
+		makeActions();
+		hookContextMenu();
+		//hookDoubleClickAction();
+		contributeToActionBars();
 	}
 
-	@Override
-	public void setFocus() {
-		// TODO Auto-generated method stub
+	private void hookContextMenu() {
+		MenuManager menuMgr = new MenuManager("#PopupMenu");
+		menuMgr.setRemoveAllWhenShown(true);
+		menuMgr.addMenuListener(new IMenuListener() {
+			public void menuAboutToShow(IMenuManager manager) {
+				MetricResultsView.this.fillContextMenu(manager);
+			}
+		});
+		Menu menu = menuMgr.createContextMenu(viewer.getControl());
+		viewer.getControl().setMenu(menu);
+		getSite().registerContextMenu(menuMgr, viewer);
+	}
 
+	private void contributeToActionBars() {
+		IActionBars bars = getViewSite().getActionBars();
+		fillLocalPullDown(bars.getMenuManager());
+		fillLocalToolBar(bars.getToolBarManager());
+	}
+
+	private void fillLocalPullDown(IMenuManager manager) {
+		manager.add(saveAction);
+		manager.add(clearAction);
+		manager.add(new Separator());
+	}
+
+	private void fillContextMenu(IMenuManager manager) {
+		manager.add(saveAction);
+		manager.add(clearAction);
+		// Other plug-ins can contribute there actions here
+		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+	}
+
+	private void fillLocalToolBar(IToolBarManager manager) {
+		manager.add(saveAction);
+		manager.add(clearAction);
+	}
+
+	private void makeActions() {
+		saveAction = new SaveAction(parent.getShell());
+		saveAction.setText("Save Results");
+		saveAction.setToolTipText("Save the results list to a file");
+		saveAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_ETOOL_SAVE_EDIT));
+		
+		clearAction = new Action(){
+			public void run() {
+				((MetricResultsViewContentProvider)viewer.getContentProvider()).removeAll();
+			}
+		};
+		clearAction.setText("Clear Results");
+		clearAction.setToolTipText("Remove all results from the list");
+		clearAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_ETOOL_DELETE));
+		
+	}
+
+	private class SaveAction extends Action {
+
+		Shell shell;
+
+		SaveAction(Shell shell) {
+			super();
+			this.shell = shell;
+		}
+
+		@SuppressWarnings("unchecked")
+		public void run() {
+			FileDialog fd = new FileDialog(shell, SWT.SAVE);
+			fd.setText("Save Results");
+			fd.setFilterPath("C:/");
+			String[] filterExt = { "*.xml", "*.*" };
+			fd.setFilterExtensions(filterExt);
+			String selected = fd.open();
+			XMLResultsManager.saveResults(selected, (List<Result>)viewer.getInput());
+		}
+	}
+	
+	private class ColumnSortListener implements Listener {
+		private TableColumn column;
+		public ColumnSortListener(TableColumn column) {
+			this.column = column;
+		}
+		
+		private void orderByColumn(TableColumn column) {
+			MetricResultsViewContentProvider provider = (MetricResultsViewContentProvider)viewer.getContentProvider();
+			if(column.getText().equals(METRIC_COLUMN_LABEL))
+				provider.sortContent(MetricResultsViewContentProvider.METRIC_NAME);
+			if(column.getText().equals(RESULT_COLUMN_LABEL))
+				provider.sortContent(MetricResultsViewContentProvider.VALUE);
+			if(column.getText().equals(DESCRIPTION_COLUMN_LABEL))
+				provider.sortContent(MetricResultsViewContentProvider.DESCRIPTION);
+			if(column.getText().equals(TIME_COLUMN_LABEL))
+				provider.sortContent(MetricResultsViewContentProvider.TIME);
+			if(column.getText().equals(CONTEXT_COLUMN_LABEL))
+				provider.sortContent(MetricResultsViewContentProvider.CONTEXT);
+		}
+
+		@Override
+		public void handleEvent(Event event) {
+			orderByColumn(column);		
+		}
 	}
 
 }
