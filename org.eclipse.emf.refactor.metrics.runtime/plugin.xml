@@ -63,6 +63,16 @@
             commandId="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsTransitivelyCommand">
       </handler>
    </extension>
-   
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.eclipse.emf.refactor.view.category"
+            class="org.eclipse.emf.refactor.metrics.runtime.MetricResultsView"
+            icon="icons/metricresultsview.PNG"
+            id="org.eclipse.emf.refactor.metrics.view"
+            name="Metric Results View"
+            restorable="true">
+      </view>
+   </extension>
 
 </plugin>
