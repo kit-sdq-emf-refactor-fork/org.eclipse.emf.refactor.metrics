@@ -34,12 +34,7 @@ public class ConfigurationManager {
 		return instance;
 	}
 	
-	/**
-	 * Returns an <i>String</i> array containing the names of all supported operations.
-	 * 
-	 * @return names of all supported operations.
-	 */
-	public static LinkedList<Metric> getAllMetrics() {
+	private static LinkedList<Metric> getAllMetrics() {
 		if (allMetrics == null)
 			allMetrics = MetricManager.getAllMetrics();
 		return allMetrics;
@@ -53,13 +48,8 @@ public class ConfigurationManager {
 	public static void saveConfiguration(IProject project) {
 		XMLProjectFileManager.saveConfiguration(getConfiguration(project));
 	}
-
-	/**
-	 * Loads the actual Metric configuration for a given project from a File.
-	 * 
-	 * @param project
-	 */
-	public static Configuration loadConfiguration(IProject project) {
+	
+	private static Configuration loadConfiguration(IProject project) {
 		return XMLProjectFileManager.loadConfiguration(project);
 	}
 	
@@ -86,12 +76,12 @@ public class ConfigurationManager {
 		configuration.setSelection(selection);
 	}
 
-	private static Configuration getConfiguration(IProject project) {
+	public static Configuration getConfiguration(IProject project) {
 		Configuration configuration = null;
 		if(! configurations.isEmpty()) {
 			for (Configuration tempConfiguration : configurations) {
 				if (tempConfiguration.getProject().equals(project))
-					configuration=tempConfiguration;
+					configuration = tempConfiguration;
 			}
 		}
 		if(configuration == null) {

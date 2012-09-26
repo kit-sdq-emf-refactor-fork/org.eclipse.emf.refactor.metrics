@@ -61,6 +61,7 @@ public class MetricsConfigurationPage extends PropertyPage {
 	@Override
 	public boolean performOk() {
 		saveSelection();
+		ConfigurationManager.getInstance();
 		ConfigurationManager.saveConfiguration(project);
 		return true;
 	}
@@ -161,6 +162,7 @@ public class MetricsConfigurationPage extends PropertyPage {
 	}
 
 	private void loadSelection() {	
+		ConfigurationManager.getInstance();
 		LinkedList<Metric> selectedMetrics = ConfigurationManager.getSelectedMetrics(project);
 		if(selectedMetrics==null || selectedMetrics.isEmpty())
 			for(int i=0; i < mapping.getSize(); i++)
@@ -174,6 +176,7 @@ public class MetricsConfigurationPage extends PropertyPage {
 		for (int index = 0; index < mapping.getSize(); index++) {
 			selection[index] = mapping.getTableItem(index).getChecked();
 		}
+		ConfigurationManager.getInstance();
 		ConfigurationManager.setConfiguration(project, selection);
 	}
 	
