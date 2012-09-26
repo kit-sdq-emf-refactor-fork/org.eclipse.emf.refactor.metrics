@@ -1,10 +1,8 @@
 package org.eclipse.emf.refactor.metrics.runtime.ui;
 
-import java.util.List;
-
-import org.eclipse.emf.refactor.metrics.runtime.core.Result;
 import org.eclipse.emf.refactor.metrics.runtime.managers.RuntimeManager;
-import org.eclipse.emf.refactor.metrics.runtime.managers.XMLResultsManager;
+import org.eclipse.emf.refactor.metrics.runtime.ui.actions.ClearAction;
+import org.eclipse.emf.refactor.metrics.runtime.ui.actions.SaveAction;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -15,14 +13,11 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
@@ -134,41 +129,8 @@ public class MetricResultsView extends ViewPart {
 	}
 
 	private void makeActions() {
-		saveAction = new SaveAction(parent.getShell());
-		saveAction.setText("Save Results");
-		saveAction.setToolTipText("Save the results list to a file");
-		saveAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_ETOOL_SAVE_EDIT));
-		
-		clearAction = new Action(){
-			public void run() {
-				((MetricResultsViewContentProvider)viewer.getContentProvider()).removeAll();
-			}
-		};
-		clearAction.setText("Clear Results");
-		clearAction.setToolTipText("Remove all results from the list");
-		clearAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_ETOOL_DELETE));
-		
-	}
-
-	private class SaveAction extends Action {
-
-		Shell shell;
-
-		SaveAction(Shell shell) {
-			super();
-			this.shell = shell;
-		}
-
-		@SuppressWarnings("unchecked")
-		public void run() {
-			FileDialog fd = new FileDialog(shell, SWT.SAVE);
-			fd.setText("Save Results");
-			fd.setFilterPath("C:/");
-			String[] filterExt = { "*.xml", "*.*" };
-			fd.setFilterExtensions(filterExt);
-			String selected = fd.open();
-			XMLResultsManager.saveResults(selected, (List<Result>)viewer.getInput());
-		}
+		saveAction = new SaveAction(parent.getShell(), viewer);		
+		clearAction = new ClearAction(viewer);		
 	}
 	
 	private class ColumnSortListener implements Listener {

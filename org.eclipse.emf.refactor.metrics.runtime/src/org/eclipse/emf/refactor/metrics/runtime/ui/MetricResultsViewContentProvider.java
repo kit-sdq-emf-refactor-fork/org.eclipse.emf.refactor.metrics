@@ -34,7 +34,7 @@ public class MetricResultsViewContentProvider implements IStructuredContentProvi
 		return result.toArray();
 	}
 	
-	protected void removeAll(){
+	public void removeAll(){
 		viewer.remove(content.toArray());
 		content.clear();
 	}
