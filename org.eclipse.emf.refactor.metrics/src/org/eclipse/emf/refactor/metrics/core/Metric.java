@@ -17,7 +17,6 @@ public class Metric {
 	private String description;
 	private String metamodel;
 	private String context;
-	private String valueType;
 	private IMetricCalculator calculateClass;
 
 	/**
@@ -32,17 +31,12 @@ public class Metric {
 	 * @param id
 	 */
 	public Metric(String name, String description, String metamodel,
-			String context, String valueType,
-			IMetricCalculator calculateClass, String id) {
+			String context, IMetricCalculator calculateClass, String id) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.metamodel = metamodel;
 		this.context = context;
-		if (valueType == null)
-			this.valueType = "double";
-		else
-			this.valueType = valueType;
 		this.calculateClass = calculateClass;
 	}
 
@@ -91,15 +85,6 @@ public class Metric {
 	 */
 	public String getContext() {
 		return context;
-	}
-
-	/**
-	 * Returns the valueType of the metric.
-	 * 
-	 * @return valueType
-	 */
-	public String getValueType() {
-		return valueType;
 	}
 
 	/**

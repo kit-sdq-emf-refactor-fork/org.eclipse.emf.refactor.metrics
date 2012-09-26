@@ -36,12 +36,9 @@ public class MetricLoader {
 			final String metamodel = rawMetric
 					.getAttribute(ExtensionPointTags.METRIC_METAMODEL_TAG);
 			final String context = rawMetric.getAttribute(ExtensionPointTags.METRIC_CONTEXT_TAG);
-			final String valueType = rawMetric
-					.getAttribute(ExtensionPointTags.METRIC_VALUE_TYPE_TAG);
 			final IMetricCalculator calculateClass = (IMetricCalculator) rawMetric
 					.createExecutableExtension(ExtensionPointTags.METRIC_CALCULATE_CLASS_TAG);
-			return new Metric(name, description, metamodel, context, valueType,
-					calculateClass, id);
+			return new Metric(name, description, metamodel, context, calculateClass, id);
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return null;
