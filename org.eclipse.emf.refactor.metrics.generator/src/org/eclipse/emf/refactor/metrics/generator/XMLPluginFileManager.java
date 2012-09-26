@@ -90,7 +90,6 @@ public class XMLPluginFileManager extends XMLManager {
 		metric.setAttribute(ExtensionPointTags.METRIC_DESCRIPTION_TAG, description);
 		metric.setAttribute(ExtensionPointTags.METRIC_METAMODEL_TAG, metamodel);
 		metric.setAttribute(ExtensionPointTags.METRIC_CONTEXT_TAG, context);
-		metric.setAttribute(ExtensionPointTags.METRIC_VALUE_TYPE_TAG, valueType);
 		metric.setAttribute(ExtensionPointTags.METRIC_CALCULATE_CLASS_TAG, calculateClass);
 		return metric;
 	}
