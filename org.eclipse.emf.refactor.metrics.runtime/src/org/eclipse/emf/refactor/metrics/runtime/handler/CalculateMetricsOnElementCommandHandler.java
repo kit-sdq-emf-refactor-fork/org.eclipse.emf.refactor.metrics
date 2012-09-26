@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.runtime;
+package org.eclipse.emf.refactor.metrics.runtime.handler;
 
 import java.util.List;
 
@@ -10,13 +10,14 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.refactor.metrics.managers.ProjectManager;
 import org.eclipse.emf.refactor.metrics.managers.SelectionManager;
+import org.eclipse.emf.refactor.metrics.runtime.managers.RuntimeManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.ui.PlatformUI;
 
-public class CalculateMetricsTransitivelyCommandHandler implements IHandler {
+public class CalculateMetricsOnElementCommandHandler implements IHandler {
 
 	@Override
 	public void addHandlerListener(IHandlerListener handlerListener) { }
@@ -34,11 +35,12 @@ public class CalculateMetricsTransitivelyCommandHandler implements IHandler {
 		if (project == null) {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setCursor(oldCursor);
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
-					"EMF Metrics", "Can not calculate metrics: project is " + project);
+					"EMF Quality Assurance", "Can not calculate metrics: project is " + project);
 			return null;
 		}
+		System.out.println("context: " + context);
 		RuntimeManager.getInstance();
-		RuntimeManager.calculateConfiguredMetricsTransitively(project, context.get(0));
+		RuntimeManager.calculateConfiguredMetricsOnElement(project, context);
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setCursor(oldCursor);
 		return null;
 	}

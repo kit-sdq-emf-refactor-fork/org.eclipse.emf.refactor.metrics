@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.runtime;
+package org.eclipse.emf.refactor.metrics.runtime.managers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

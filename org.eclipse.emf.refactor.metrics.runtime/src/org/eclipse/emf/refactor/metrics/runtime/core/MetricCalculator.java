@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.runtime;
+package org.eclipse.emf.refactor.metrics.runtime.core;
 
 import java.util.LinkedList;
 import java.util.List;

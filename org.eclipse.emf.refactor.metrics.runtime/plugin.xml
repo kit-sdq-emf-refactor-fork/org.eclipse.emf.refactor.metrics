@@ -55,11 +55,11 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.eclipse.emf.refactor.metrics.runtime.CalculateMetricsOnElementCommandHandler"
+            class="org.eclipse.emf.refactor.metrics.runtime.handler.CalculateMetricsOnElementCommandHandler"
             commandId="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsOnElementCommand">
       </handler>
       <handler
-            class="org.eclipse.emf.refactor.metrics.runtime.CalculateMetricsTransitivelyCommandHandler"
+            class="org.eclipse.emf.refactor.metrics.runtime.handler.CalculateMetricsTransitivelyCommandHandler"
             commandId="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsTransitivelyCommand">
       </handler>
    </extension>
@@ -67,7 +67,7 @@
          point="org.eclipse.ui.views">
       <view
             category="org.eclipse.emf.refactor.view.category"
-            class="org.eclipse.emf.refactor.metrics.runtime.MetricResultsView"
+            class="org.eclipse.emf.refactor.metrics.runtime.ui.MetricResultsView"
             icon="icons/metricresultsview.PNG"
             id="org.eclipse.emf.refactor.metrics.view"
             name="Metric Results View"

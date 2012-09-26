@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.runtime;
+package org.eclipse.emf.refactor.metrics.runtime.ui;
 
 
 import java.math.BigDecimal;
@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.refactor.metrics.runtime.core.Result;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;

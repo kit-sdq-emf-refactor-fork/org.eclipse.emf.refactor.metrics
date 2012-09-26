@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.runtime;
+package org.eclipse.emf.refactor.metrics.runtime.managers;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,6 +13,9 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.refactor.metrics.configuration.core.Configuration;
 import org.eclipse.emf.refactor.metrics.configuration.managers.ConfigurationManager;
+import org.eclipse.emf.refactor.metrics.runtime.core.MetricCalculator;
+import org.eclipse.emf.refactor.metrics.runtime.core.Result;
+import org.eclipse.emf.refactor.metrics.runtime.ui.MetricResultsView;
 import org.eclipse.jface.viewers.TableViewer;
 
 public class RuntimeManager {

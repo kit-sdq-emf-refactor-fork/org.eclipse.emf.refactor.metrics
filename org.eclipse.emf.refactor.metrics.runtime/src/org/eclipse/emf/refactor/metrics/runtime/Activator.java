@@ -1,5 +1,6 @@
 package org.eclipse.emf.refactor.metrics.runtime;
 
+import org.eclipse.emf.refactor.metrics.runtime.managers.RuntimeManager;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 

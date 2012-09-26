@@ -1,8 +1,9 @@
-package org.eclipse.emf.refactor.metrics.runtime;
+package org.eclipse.emf.refactor.metrics.runtime.ui;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.emf.refactor.metrics.runtime.core.Result;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;

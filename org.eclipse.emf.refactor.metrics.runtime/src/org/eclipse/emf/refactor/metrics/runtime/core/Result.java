@@ -1,9 +1,10 @@
-package org.eclipse.emf.refactor.metrics.runtime;
+package org.eclipse.emf.refactor.metrics.runtime.core;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.refactor.metrics.core.Metric;
+import org.eclipse.emf.refactor.metrics.runtime.managers.TimeStampManager;
 
 /**
  * This class provides a container for the results of metric calculations.

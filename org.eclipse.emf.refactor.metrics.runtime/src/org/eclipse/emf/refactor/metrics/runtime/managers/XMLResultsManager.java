@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.runtime;
+package org.eclipse.emf.refactor.metrics.runtime.managers;
 
 import java.text.DecimalFormat;
 import java.util.LinkedList;
@@ -13,6 +13,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.refactor.metrics.managers.XMLManager;
+import org.eclipse.emf.refactor.metrics.runtime.core.Result;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

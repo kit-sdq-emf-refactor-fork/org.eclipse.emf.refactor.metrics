@@ -1,7 +1,10 @@
-package org.eclipse.emf.refactor.metrics.runtime;
+package org.eclipse.emf.refactor.metrics.runtime.ui;
 
 import java.util.List;
 
+import org.eclipse.emf.refactor.metrics.runtime.core.Result;
+import org.eclipse.emf.refactor.metrics.runtime.managers.RuntimeManager;
+import org.eclipse.emf.refactor.metrics.runtime.managers.XMLResultsManager;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
