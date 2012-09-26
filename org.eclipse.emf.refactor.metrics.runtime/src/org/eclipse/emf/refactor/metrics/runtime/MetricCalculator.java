@@ -25,7 +25,7 @@ public class MetricCalculator {
 	 * 
 	 * @return metricCalculator
 	 */
-	public static MetricCalculator getCalculator() {
+	public static MetricCalculator getInstance() {
 		if (calculator == null)
 			calculator = new MetricCalculator();
 		return calculator;

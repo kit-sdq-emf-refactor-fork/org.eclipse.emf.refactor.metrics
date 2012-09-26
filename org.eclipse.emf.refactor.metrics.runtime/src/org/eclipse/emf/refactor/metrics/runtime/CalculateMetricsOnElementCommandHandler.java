@@ -38,7 +38,8 @@ public class CalculateMetricsOnElementCommandHandler implements IHandler {
 			return null;
 		}
 		System.out.println("context: " + context);
-		EMFMetrics.calculateConfiguredMetrics(project, context);
+		RuntimeManager.getInstance();
+		RuntimeManager.calculateConfiguredMetricsOnElement(project, context);
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setCursor(oldCursor);
 		return null;
 	}

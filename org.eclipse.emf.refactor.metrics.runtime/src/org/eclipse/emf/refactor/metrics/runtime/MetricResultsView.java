@@ -54,12 +54,13 @@ public class MetricResultsView extends ViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
+		RuntimeManager.getInstance();
 		this.parent = parent;
 		TableColumn column;
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL);
 		final Table table = viewer.getTable();
-		EMFMetrics.setResultsViewer(viewer);
+		RuntimeManager.setResultsViewer(viewer);
 		column = new TableColumn(table, SWT.LEFT);
 		column.setText(TIME_COLUMN_LABEL);
 		column.setWidth(150);
@@ -84,7 +85,7 @@ public class MetricResultsView extends ViewPart {
 		table.setLinesVisible(true);
 		viewer.setContentProvider(new MetricResultsViewContentProvider());
 		viewer.setLabelProvider(new MetricResultsViewLabelProvider());
-		viewer.setInput(EMFMetrics.getResultsViewInput());
+		viewer.setInput(RuntimeManager.getResultsViewInput());
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(),"EMFMetrics.viewer");
 		makeActions();
 		hookContextMenu();

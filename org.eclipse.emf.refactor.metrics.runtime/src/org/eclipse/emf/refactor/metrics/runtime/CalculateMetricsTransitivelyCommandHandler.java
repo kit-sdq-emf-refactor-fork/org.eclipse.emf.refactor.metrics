@@ -37,7 +37,8 @@ public class CalculateMetricsTransitivelyCommandHandler implements IHandler {
 					"EMF Metrics", "Can not calculate metrics: project is " + project);
 			return null;
 		}
-		EMFMetrics.calculateAllConfiguredMetrics(project, context.get(0));
+		RuntimeManager.getInstance();
+		RuntimeManager.calculateConfiguredMetricsTransitively(project, context.get(0));
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setCursor(oldCursor);
 		MessageDialog.openInformation(null, null, "calculate metrics transitively: to do ...");
 		return null;
