@@ -14,4 +14,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.emf.refactor.metrics.core,
  org.eclipse.emf.refactor.metrics.interfaces,
- org.eclipse.emf.refactor.metrics.managers
+ org.eclipse.emf.refactor.metrics.managers,
+ org.eclipse.emf.refactor.metrics.operations
