@@ -40,7 +40,6 @@ public class CalculateMetricsTransitivelyCommandHandler implements IHandler {
 		RuntimeManager.getInstance();
 		RuntimeManager.calculateConfiguredMetricsTransitively(project, context.get(0));
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setCursor(oldCursor);
-		MessageDialog.openInformation(null, null, "calculate metrics transitively: to do ...");
 		return null;
 	}
 
