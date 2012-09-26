@@ -1,0 +1,32 @@
+<%@ jet package="de.unimarburg.swt.emf.metrics" class="HenshinFinderClass"
+imports="de.unimarburg.swt.emf.metrics.model.generator.MetricInfo"%>
+<%MetricInfo info = (MetricInfo) argument; %>
+package <%=info.getPackage()%>;
+
+
+
+import java.util.List;
+import org.eclipse.emf.ecore.EObject;
+import de.unimarburg.swt.emf.metrics.interfaces.ICalculateClass;
+
+
+public final class <%=info.getClassName()%> implements ICalculateClass {
+
+		
+	private List<EObject> context; 
+		
+	@Override
+	public void setContext(List<EObject> context) {
+		this.context=context;
+	}	
+		
+	@Override
+	public double calculate() {	
+		<%=info.getContext()%> in = (<%=info.getContext()%>) context.get(0);
+		double ret = 0.0;
+		
+		// TODO fill 'ret'
+		
+		return ret;
+	}
+}
