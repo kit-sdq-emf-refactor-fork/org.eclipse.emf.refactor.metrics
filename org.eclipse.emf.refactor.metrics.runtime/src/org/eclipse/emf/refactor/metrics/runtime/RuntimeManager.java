@@ -26,6 +26,7 @@ public class RuntimeManager {
 	private RuntimeManager() {
 		calculator = MetricCalculator.getInstance();
 		resultsViewInput = new LinkedList<Result>();
+		System.out.println("RuntimeManager initialized!");
 	}
 	
 	public static RuntimeManager getInstance() {
