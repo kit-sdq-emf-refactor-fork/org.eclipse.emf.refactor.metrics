@@ -34,7 +34,8 @@ public class SaveAction extends Action {
 		String[] filterExt = { "*.xml", "*.*" };
 		fd.setFilterExtensions(filterExt);
 		String selected = fd.open();
-		XMLResultsManager.saveResults(selected, (List<Result>) viewer.getInput());
+		if (selected != null)
+			XMLResultsManager.saveResults(selected, (List<Result>) viewer.getInput());
 	}
 
 }
