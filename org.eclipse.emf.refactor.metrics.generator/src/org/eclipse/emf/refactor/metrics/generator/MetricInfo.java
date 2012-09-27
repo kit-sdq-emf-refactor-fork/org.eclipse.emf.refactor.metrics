@@ -137,4 +137,12 @@ public class MetricInfo {
 		this.jar = jar;
 	}
 
+	@Override
+	public String toString() {
+		return "MetricInfo [name=" + name + ", description=" + description
+				+ ", project=" + project + ", context=" + context
+				+ ", metamodel=" + metamodel + ", id=" + id + ", jar=" + jar
+				+ "]";
+	}
+
 }

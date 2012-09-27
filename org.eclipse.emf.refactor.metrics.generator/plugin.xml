@@ -5,10 +5,10 @@
          point="org.eclipse.ui.newWizards">
       <wizard
             category="org.eclipse.emf.refactor.newwizards.category"
-            class="org.eclipse.emf.refactor.metrics.generator.NewMetricWizard"
+            class="org.eclipse.emf.refactor.metrics.generator.NewMetricWizardJava"
             icon="icons/newmetric.PNG"
             id="org.eclipse.emf.refactor.metrics.newwizard"
-            name="Metric">
+            name="Metric (specified in Java)">
       </wizard>
    </extension>
 </plugin>
