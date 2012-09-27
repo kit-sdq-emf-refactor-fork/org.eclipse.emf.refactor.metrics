@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
+	<extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.emf.refactor.newwizards.category"
+            class="org.eclipse.emf.refactor.metrics.generator.NewMetricWizard"
+            icon="icons/newmetric.PNG"
+            id="org.eclipse.emf.refactor.metrics.newwizard"
+            name="Metric">
+      </wizard>
+   </extension>
 </plugin>
