@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.generator;
+package org.eclipse.emf.refactor.metrics.generator.ui;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
@@ -8,9 +8,9 @@ import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.refactor.metrics.core.Metric;
-import org.eclipse.emf.refactor.metrics.interfaces.IOperation;
-import org.eclipse.emf.refactor.metrics.managers.MetricManager;
+import org.eclipse.emf.refactor.metrics.generator.core.MetricInfo;
+import org.eclipse.emf.refactor.metrics.generator.interfaces.INewMetricWizard;
+import org.eclipse.emf.refactor.metrics.generator.managers.GenerationManager;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -18,17 +18,15 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-public class NewMetricWizardComposite extends Wizard implements INewWizard, INewMetricWizard {
+public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetricWizard {
 	
-	protected static final String TRANSFORMATIONS_DIR = "/transformations/";
 	private final String WINDOW_TITLE = "New Metric";
 	private MetricBasicDataWizardPage basicDataPage;
-	private CompositeDataWizardPage compositePage;
 	private String name, id, description, metamodel, context, jar;
 	private LinkedList<IProject> projects;
 	private IProject targetProject;
 
-	public NewMetricWizardComposite() { }
+	public NewMetricWizardJava() { }
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -40,13 +38,11 @@ public class NewMetricWizardComposite extends Wizard implements INewWizard, INew
 		setWindowTitle(WINDOW_TITLE);
 		basicDataPage = new MetricBasicDataWizardPage();
 		addPage(basicDataPage);
-		compositePage = new CompositeDataWizardPage();
-		addPage(compositePage);
 	}
 	
 	@Override
 	public boolean canFinish() {
-		return (basicDataPage.isPageComplete() && compositePage.isPageComplete());
+		return basicDataPage.isPageComplete();
 	}
 
 	@Override
@@ -87,15 +83,10 @@ public class NewMetricWizardComposite extends Wizard implements INewWizard, INew
 		}
 	}
 	
-	private CompositeMetricInfo getMetricInfo() {
-		MetricManager.getInstance();
+	private MetricInfo getMetricInfo(){
 		String proj = this.targetProject.getLocation().toString();
-		Metric first = compositePage.getFirstMetric();
-		Metric second = compositePage.getSecondMetric();
-		String operationName = compositePage.getOperationName();
-		IOperation operation = MetricManager.getOperation(operationName);
-		CompositeMetricInfo info = new CompositeMetricInfo(this.name, this.id, this.description, 
-						this.metamodel, this.context, proj, first, second, operation, getJar());
+		MetricInfo info = new MetricInfo(this.name, this.id, this.description, 
+							this.metamodel, this.context, proj, getJar());
 		return info;
 	}
 	
@@ -153,19 +144,15 @@ public class NewMetricWizardComposite extends Wizard implements INewWizard, INew
 	public void setJar(String jar) {
 		this.jar = jar;
 	}
-	
-	public CompositeDataWizardPage getCompositePage() {
-		return compositePage;
-	}
 
 	@Override
 	public int getPageNumbers() {
-		return 2;
+		return 1;
 	}
 
 	@Override
 	public WizardPage getSecondPage() {
-		return this.compositePage;
+		return null;
 	}
 
 }

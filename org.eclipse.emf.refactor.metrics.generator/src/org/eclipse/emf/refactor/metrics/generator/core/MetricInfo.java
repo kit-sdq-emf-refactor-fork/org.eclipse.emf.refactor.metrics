@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.generator;
+package org.eclipse.emf.refactor.metrics.generator.core;
 
 /**
  * This class provides a container for the information needed to generate a new metric. 

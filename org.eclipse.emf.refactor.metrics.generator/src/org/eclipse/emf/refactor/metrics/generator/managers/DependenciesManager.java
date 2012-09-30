@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.generator;
+package org.eclipse.emf.refactor.metrics.generator.managers;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.util.jar.Manifest;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.refactor.metrics.generator.core.MetricInfo;
 
 public class DependenciesManager {
 

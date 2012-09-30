@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.generator;
+package org.eclipse.emf.refactor.metrics.generator.managers;
 
 import java.io.File;
 import java.io.IOException;

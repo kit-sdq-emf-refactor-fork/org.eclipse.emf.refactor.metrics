@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.generator;
+package org.eclipse.emf.refactor.metrics.generator.managers;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -19,6 +19,9 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.codegen.jet.JETEmitter;
 import org.eclipse.emf.codegen.jet.JETException;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.refactor.metrics.generator.Activator;
+import org.eclipse.emf.refactor.metrics.generator.core.CompositeMetricInfo;
+import org.eclipse.emf.refactor.metrics.generator.core.MetricInfo;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.JavaCore;
 import org.osgi.framework.Bundle;

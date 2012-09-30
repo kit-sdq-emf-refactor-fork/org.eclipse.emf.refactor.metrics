@@ -1,5 +1,6 @@
 package org.eclipse.emf.refactor.metrics.generator;
 
+import org.eclipse.emf.refactor.metrics.generator.managers.GenerationManager;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
