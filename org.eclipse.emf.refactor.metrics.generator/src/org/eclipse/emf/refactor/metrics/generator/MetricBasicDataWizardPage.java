@@ -21,9 +21,9 @@ import org.eclipse.swt.widgets.Text;
 public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 
 	private static final String PAGE_NAME = "org.eclipse.emf.refactor.metrics.MetricBasicDataWizardPage";
-	private static final String PAGE_TITLE = "Basic Metric Data";
-	private static final String PAGE_DESCRIPTION = "Please specify basic metric data. \n"
-												+ "(required fields are denoted by \"*\")";
+	private static final String PAGE_TITLE = "New Metric: Basic Data";
+	private static final String PAGE_DESCRIPTION = "Please specify basic metric data. " +
+												"Required fields are denoted by \"(*)\".";
 	private Text nameTextField, idTextField, descriptionTextField;
 	private Combo projectCombo, metamodelCombo, contextCombo;
 	private boolean initialization = false;
@@ -110,7 +110,7 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 		// col:1
 		label = new Label(group, SWT.NONE);
 		label.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
-		label.setText("Target project *:");
+		label.setText("Target project (*):");
 		// col:2
 		projectCombo = new Combo(group, SWT.READ_ONLY);
 		final GridData projectComboData = new GridData(GridData.FILL_HORIZONTAL);
@@ -128,7 +128,7 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 		// - Name -
 		// col:1
 		label = new Label(group, SWT.NONE);
-		label.setText("Name *:");
+		label.setText("Name (*):");
 		label.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
 		// col:2
 		nameTextField = new Text(group, SWT.BORDER);
@@ -137,7 +137,7 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 		// - Id -
 		// col:1
 		label = new Label(group, SWT.NONE);
-		label.setText("ID *:");
+		label.setText("Metric ID (*):");
 		label.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
 		// col:2
 		idTextField = new Text(group, SWT.BORDER);
@@ -154,7 +154,7 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 		descriptionTextField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		// - Source -
 		group = new Group(container, SWT.NONE);
-		group.setText("Meta Model and Context Data");
+		group.setText("Meta Model and Context Type");
 	    layout = new GridLayout();
 	    layout.numColumns = 2;
 	    group.setLayout(layout);
@@ -163,7 +163,7 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 	    // - Metamodel -
 	 	// col:1
 	 	label = new Label(group, SWT.NONE);
-	 	label.setText("Metamodel *:");
+	 	label.setText("Meta model (*):");
 	 	label.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
 	 	// col:2
 	 	metamodelCombo = new Combo(group, SWT.BORDER);
@@ -171,7 +171,7 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 	    // - Context -
 	 	// col:1
 	 	label = new Label(group, SWT.NONE);
-	 	label.setText("Context *:");
+	 	label.setText("Context type (*):");
 	 	label.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
 	 	// col:2
 	 	contextCombo = new Combo(group, SWT.BORDER);
