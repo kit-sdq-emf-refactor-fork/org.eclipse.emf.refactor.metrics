@@ -24,8 +24,8 @@ public class XMLPluginFileManager extends XMLManager {
 	public static final String POINT_ATTR_TAG = "point";
 	
 	public static void createMetricEntry(String project, String name,
-			String description, String metamodel, String context,
-			String valueType, String id, String calculateClass) {
+			String description, String metamodel, String context, 
+			String id, String calculateClass) {
 		final DocumentBuilder builder = createDocumentBuilder();
 		final String path = project + PLUGIN_FILE;
 		Document doc = null;
@@ -44,7 +44,7 @@ public class XMLPluginFileManager extends XMLManager {
 			if (doc != null) {
 				root = doc.getDocumentElement();
 				Node extensionPoint = root.getElementsByTagName(EXTENSION_TAG).item(0);
-				Node newEntry = createMetricElement(doc, name, description,	metamodel, context, valueType, id, calculateClass);
+				Node newEntry = createMetricElement(doc, name, description,	metamodel, context, id, calculateClass);
 				extensionPoint.appendChild(newEntry);
 			}
 		}
@@ -82,8 +82,7 @@ public class XMLPluginFileManager extends XMLManager {
 	}
 
 	private static Element createMetricElement(Document doc, String name,
-			String id, String description, String metamodel, String context,
-			String valueType, String calculateClass) {
+			String id, String description, String metamodel, String context, String calculateClass) {
 		final Element metric = doc.createElement(ExtensionPointTags.METRIC_TAG);
 		metric.setAttribute(ExtensionPointTags.METRIC_NAME_TAG, name);
 		metric.setAttribute(ExtensionPointTags.METRIC_ID_TAG, id);
