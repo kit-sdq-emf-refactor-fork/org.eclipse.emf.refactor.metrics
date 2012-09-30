@@ -8,6 +8,9 @@ import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.refactor.metrics.core.Metric;
+import org.eclipse.emf.refactor.metrics.interfaces.IOperation;
+import org.eclipse.emf.refactor.metrics.managers.MetricManager;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -15,15 +18,17 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetricWizard {
+public class NewMetricWizardComposite extends Wizard implements INewWizard, INewMetricWizard {
 	
+	protected static final String TRANSFORMATIONS_DIR = "/transformations/";
 	private final String WINDOW_TITLE = "New Metric";
 	private MetricBasicDataWizardPage basicDataPage;
+	private CompositeDataWizardPage compositePage;
 	private String name, id, description, metamodel, context, jar;
 	private LinkedList<IProject> projects;
 	private IProject targetProject;
 
-	public NewMetricWizardJava() { }
+	public NewMetricWizardComposite() { }
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -35,11 +40,13 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 		setWindowTitle(WINDOW_TITLE);
 		basicDataPage = new MetricBasicDataWizardPage();
 		addPage(basicDataPage);
+		compositePage = new CompositeDataWizardPage();
+		addPage(compositePage);
 	}
 	
 	@Override
 	public boolean canFinish() {
-		return basicDataPage.isPageComplete();
+		return (basicDataPage.isPageComplete() && compositePage.isPageComplete());
 	}
 
 	@Override
@@ -80,10 +87,15 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 		}
 	}
 	
-	private MetricInfo getMetricInfo(){
+	private CompositeMetricInfo getMetricInfo() {
+		MetricManager.getInstance();
 		String proj = this.targetProject.getLocation().toString();
-		MetricInfo info = new MetricInfo(this.name, this.id, this.description, 
-							this.metamodel, this.context, proj, getJar());
+		Metric first = compositePage.getFirstMetric();
+		Metric second = compositePage.getSecondMetric();
+		String operationName = compositePage.getOperationName();
+		IOperation operation = MetricManager.getOperation(operationName);
+		CompositeMetricInfo info = new CompositeMetricInfo(this.name, this.id, this.description, 
+						this.metamodel, this.context, proj, first, second, operation, getJar());
 		return info;
 	}
 	
@@ -141,15 +153,19 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 	public void setJar(String jar) {
 		this.jar = jar;
 	}
+	
+	public CompositeDataWizardPage getCompositePage() {
+		return compositePage;
+	}
 
 	@Override
 	public int getPageNumbers() {
-		return 1;
+		return 2;
 	}
 
 	@Override
 	public WizardPage getSecondPage() {
-		return null;
+		return this.compositePage;
 	}
 
 }

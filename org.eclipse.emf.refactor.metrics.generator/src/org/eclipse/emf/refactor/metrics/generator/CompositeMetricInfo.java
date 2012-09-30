@@ -14,7 +14,7 @@ import org.eclipse.emf.refactor.metrics.operations.Operations;
  */
 public class CompositeMetricInfo extends MetricInfo  {
 
-	private Metric firstMetric, secondMetric;
+	private Metric firstMetric = null, secondMetric = null;
 	private IOperation operation;
 	
 	/**
@@ -75,5 +75,19 @@ public class CompositeMetricInfo extends MetricInfo  {
 	public String getOperationName(){
 		return Operations.getOperationName(operation);
 	}
+
+	@Override
+	public String toString() {
+		return "CompositeMetricInfo [firstMetric=" + firstMetric
+				+ ", secondMetric=" + secondMetric + ", operation=" + operation
+				+ ", getPackage()=" + getPackage() + ", getId()=" + getId()
+				+ ", getName()=" + getName() + ", getClassName()="
+				+ getClassName() + ", getDescription()=" + getDescription()
+				+ ", getProjectPath()=" + getProjectPath()
+				+ ", getProjectName()=" + getProjectName() + ", getContext()="
+				+ getContext() + ", getMetamodel()=" + getMetamodel()
+				+ ", getJar()=" + getJar() + "]";
+	}
+
 	
 }

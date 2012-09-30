@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
-public class MetricBasicDataWizardPage extends WizardPage implements Listener{
+public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 
 	private static final String PAGE_NAME = "org.eclipse.emf.refactor.metrics.MetricBasicDataWizardPage";
 	private static final String PAGE_TITLE = "New Metric: Basic Data";
@@ -26,7 +26,6 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 												"Required fields are denoted by \"(*)\".";
 	private Text nameTextField, idTextField, descriptionTextField;
 	private Combo projectCombo, metamodelCombo, contextCombo;
-	private boolean initialization = false;
 	private String jar = "";
 	
 	@Override
@@ -36,23 +35,32 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 		layout.numColumns = 1;
 		container.setLayout(layout);
 		createTextFields(container);
-		initContents();
+		initProjectsAndMetamodels();
 		setControl(container);
 		this.setPageComplete(false);
 	}	
 
 	@Override
 	public boolean canFlipToNextPage() {
-		if(! initialization) {
+		if (((INewMetricWizard) getWizard()).getPageNumbers() > 1) {
+			return this.isPageComplete();
+		} else {
 			return false;
 		}
-		return this.isPageComplete();
+	}
+	
+	public WizardPage getNextPage() {
+		if (((INewMetricWizard) getWizard()).getPageNumbers() > 1) {
+			return ((INewMetricWizard) getWizard()).getSecondPage();
+		} else {
+			return null;
+		}
 	}
 	
 	@Override
 	public void handleEvent(Event event) {
 		if (event.widget == projectCombo) {
-			((NewMetricWizardJava)getWizard()).setTargetProject(projectCombo.getText());
+			((INewMetricWizard) getWizard()).setTargetProject(projectCombo.getText());
 		}
 		if (event.widget == metamodelCombo) {
 			String nsURI = metamodelCombo.getText();
@@ -78,14 +86,8 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 				contextCombo.removeAll();
 			}
 		}
-		if(!initialization){
 			updatePageComplete();
-			getWizard().getContainer().updateButtons();		
-		}
-	}
-	
-	public WizardPage getNextPage() {
-		return null;
+			getWizard().getContainer().updateButtons();	
 	}
 
 	public MetricBasicDataWizardPage() {
@@ -178,14 +180,8 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 	 	contextCombo.addListener(SWT.Selection, this);
 	}
 	
-	private void initContents() {
-		initialization = true;
-		initProjectsAndMetamodels();
-		initialization = false;
-	}
-	
 	private void initProjectsAndMetamodels(){
-		for (IProject project : ((NewMetricWizardJava)getWizard()).getProjects()) {
+		for (IProject project : ((INewMetricWizard) getWizard()).getProjects()) {
 			projectCombo.add(project.getName());
 		}
 		Object [] metamodelObjects = 
@@ -235,12 +231,12 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener{
 	}
 	
 	private void saveTextFieldValues(){
-		((NewMetricWizardJava)getWizard()).setName(this.nameTextField.getText());
-		((NewMetricWizardJava)getWizard()).setId(this.idTextField.getText());
-		((NewMetricWizardJava)getWizard()).setDescription(this.descriptionTextField.getText());
-		((NewMetricWizardJava)getWizard()).setMetamodel(this.metamodelCombo.getText());
-		((NewMetricWizardJava)getWizard()).setContext(this.contextCombo.getText());
-		((NewMetricWizardJava)getWizard()).setJar(jar);
+		((INewMetricWizard) getWizard()).setName(this.nameTextField.getText());
+		((INewMetricWizard) getWizard()).setId(this.idTextField.getText());
+		((INewMetricWizard) getWizard()).setDescription(this.descriptionTextField.getText());
+		((INewMetricWizard) getWizard()).setMetamodel(this.metamodelCombo.getText());
+		((INewMetricWizard) getWizard()).setContext(this.contextCombo.getText());
+		((INewMetricWizard) getWizard()).setJar(jar);
 	}
 
 }

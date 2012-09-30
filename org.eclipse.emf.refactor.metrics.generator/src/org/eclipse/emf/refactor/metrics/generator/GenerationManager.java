@@ -21,6 +21,7 @@ public class GenerationManager {
 	public static void createNewMetric(IProgressMonitor monitor,
 			MetricInfo metricInfo, IProject targetProject) {
 		System.out.println("Here we go...");
+		System.out.println(metricInfo);
 	}
 
 }
