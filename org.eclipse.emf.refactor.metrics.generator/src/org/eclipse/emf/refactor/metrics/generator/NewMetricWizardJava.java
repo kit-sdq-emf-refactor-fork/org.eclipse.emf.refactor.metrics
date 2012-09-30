@@ -16,7 +16,6 @@ import org.eclipse.ui.IWorkbench;
 
 public class NewMetricWizardJava extends Wizard implements INewWizard {
 	
-	protected static final String TRANSFORMATIONS_DIR = "/transformations/";
 	private final String WINDOW_TITLE = "New Metric";
 	private MetricBasicDataWizardPage basicDataPage;
 	private String name, id, description, metamodel, context, jar;
