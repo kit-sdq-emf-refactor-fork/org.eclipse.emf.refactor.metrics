@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.103.0",
  org.eclipse.jdt.core;bundle-version="3.8.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.emf.refactor.metrics.core,
+Export-Package: org.eclipse.emf.refactor.metrics,
+ org.eclipse.emf.refactor.metrics.core,
  org.eclipse.emf.refactor.metrics.interfaces,
  org.eclipse.emf.refactor.metrics.managers,
  org.eclipse.emf.refactor.metrics.operations
