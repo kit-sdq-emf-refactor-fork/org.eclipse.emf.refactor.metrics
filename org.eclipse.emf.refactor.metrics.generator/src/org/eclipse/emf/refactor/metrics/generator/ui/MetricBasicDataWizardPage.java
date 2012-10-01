@@ -1,5 +1,7 @@
 package org.eclipse.emf.refactor.metrics.generator.ui;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 
 import org.eclipse.core.resources.IProject;
@@ -28,6 +30,7 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 	private Text nameTextField, idTextField, descriptionTextField;
 	private Combo projectCombo, metamodelCombo, contextCombo;
 	private String jar = "";
+	private String importPackage;
 	
 	@Override
 	public void createControl(Composite parent) {
@@ -44,10 +47,12 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 	@Override
 	public boolean canFlipToNextPage() {
 		if (((INewMetricWizard) getWizard()).getPageNumbers() > 1) {
-			return this.isPageComplete();
-		} else {
-			return false;
-		}
+			if (this.isPageComplete()) {
+				((INewMetricWizard) getWizard()).updateSecondPage();
+				return true;
+			}
+		} 
+		return false;
 	}
 	
 	public WizardPage getNextPage() {
@@ -68,18 +73,36 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 			if (nsURI != null && ! nsURI.isEmpty()) {
 				EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
 				if (ePackage != null) {
-					jar = ePackage.getClass().getPackage().getName();
-					contextCombo.removeAll();
-					Object[] eObjectNames = new Object[ePackage.eContents().size()];
-					for (int i = 0; i < eObjectNames.length; i++) {
-						EObject eObject = ePackage.eContents().get(i);
-						if (eObject instanceof ENamedElement) {
-							eObjectNames[i] = ((ENamedElement) ePackage.eContents().get(i)).getName();
+					importPackage = ePackage.getClass().getPackage().getName();
+					if (importPackage.endsWith(".impl")) {
+						int length = importPackage.length();
+						importPackage = importPackage.substring(0, length-5);
+					}
+					System.out.println("importPackage: " + importPackage);
+					File jarFile;
+					try {
+						jarFile = new File
+								(ePackage.getClass().getProtectionDomain()
+								.getCodeSource().getLocation().toURI());
+						String jarName = jarFile.getName();
+						int index = jarName.indexOf("_");
+						jar = jarName.substring(0, index);
+						System.out.println("Jar5: " + jar);
+					} catch (URISyntaxException e) {
+						e.printStackTrace();
+					} finally {	
+						contextCombo.removeAll();
+						Object[] eObjectNames = new Object[ePackage.eContents().size()];
+						for (int i = 0; i < eObjectNames.length; i++) {
+							EObject eObject = ePackage.eContents().get(i);
+							if (eObject instanceof ENamedElement) {
+								eObjectNames[i] = ((ENamedElement) ePackage.eContents().get(i)).getName();
+							}
+						}					
+				        Arrays.sort(eObjectNames);
+						for(Object object : eObjectNames){
+							contextCombo.add((String)object);
 						}
-					}					
-			        Arrays.sort(eObjectNames);
-					for(Object object : eObjectNames){
-						contextCombo.add((String)object);
 					}
 				}
 			} else {
@@ -238,6 +261,7 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 		((INewMetricWizard) getWizard()).setMetamodel(this.metamodelCombo.getText());
 		((INewMetricWizard) getWizard()).setContext(this.contextCombo.getText());
 		((INewMetricWizard) getWizard()).setJar(jar);
+		((INewMetricWizard) getWizard()).setImportPackage(importPackage);
 	}
 
 }

@@ -1,18 +1,16 @@
-<%@ jet package="de.unimarburg.swt.emf.metrics" class="CompositeCalculateClassTemplate"
-imports="de.unimarburg.swt.emf.metrics.model.generator.CompositeMetricInfo"%>
+<%@ jet package="org.eclipse.emf.refactor.metrics" class="CompositeCalculateClassTemplate"
+imports="org.eclipse.emf.refactor.metrics.generator.core.CompositeMetricInfo"%>
 <%CompositeMetricInfo info = (CompositeMetricInfo) argument; %>
 package <%=info.getPackage()%>;
 
-
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
-import de.unimarburg.swt.emf.metrics.interfaces.ICalculateClass;
-import de.unimarburg.swt.emf.metrics.model.Metric;
-import de.unimarburg.swt.emf.metrics.operations.IOperation;
-import de.unimarburg.swt.emf.metrics.operations.Operations;
+import org.eclipse.emf.refactor.metrics.interfaces.IMetricCalculator;
+import org.eclipse.emf.refactor.metrics.interfaces.IOperation;
+import org.eclipse.emf.refactor.metrics.core.Metric;
+import org.eclipse.emf.refactor.metrics.operations.Operations;
 
-
-public final class <%=info.getClassName()%> implements ICalculateClass{
+public final class <%=info.getClassName()%> implements IMetricCalculator {
 
 	private List<EObject> context;
 	private String metricID1 = "<%=info.getFirstMetric().getId()%>";
@@ -30,8 +28,8 @@ public final class <%=info.getClassName()%> implements ICalculateClass{
 		Metric metric1 = Metric.getMetricInstanceFromId(metricID1);
 		Metric metric2 = Metric.getMetricInstanceFromId(metricID2);
 		
-		ICalculateClass calc1 = metric1.getCalculateClass();
-		ICalculateClass calc2 = metric2.getCalculateClass();
+		IMetricCalculator calc1 = metric1.getCalculateClass();
+		IMetricCalculator calc2 = metric2.getCalculateClass();
 			
 		calc1.setContext(this.context);
 		calc2.setContext(this.context);

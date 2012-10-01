@@ -153,7 +153,7 @@ public class CompositeDataWizardPage extends WizardPage {
 	 		col.setWidth(200);
 	}
 	
-	protected void fillTables(){
+	protected void fillTables() {
 		String metamodel = ((NewMetricWizardComposite)getWizard()).getMetamodel();
 		String context = ((NewMetricWizardComposite)getWizard()).getContext() ;
 		System.out.println("filling tables for metamodel:"+metamodel+" context:"+context);

@@ -1,16 +1,15 @@
-<%@ jet package="de.unimarburg.swt.emf.metrics" class="HenshinFinderClass"
-imports="de.unimarburg.swt.emf.metrics.model.generator.MetricInfo"%>
+<%@ jet package="org.eclipse.emf.refactor.metrics" class="HenshinFinderClass"
+imports="org.eclipse.emf.refactor.metrics.generator.core.MetricInfo"%>
 <%MetricInfo info = (MetricInfo) argument; %>
 package <%=info.getPackage()%>;
 
-
-
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
-import de.unimarburg.swt.emf.metrics.interfaces.ICalculateClass;
+import org.eclipse.emf.refactor.metrics.interfaces.IMetricCalculator;
+import <%=info.getImportPackage()%>.*;
 
 
-public final class <%=info.getClassName()%> implements ICalculateClass {
+public final class <%=info.getClassName()%> implements IMetricCalculator {
 
 		
 	private List<EObject> context; 

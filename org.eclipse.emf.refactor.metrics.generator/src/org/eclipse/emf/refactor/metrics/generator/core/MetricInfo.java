@@ -7,7 +7,7 @@ package org.eclipse.emf.refactor.metrics.generator.core;
  */
 public class MetricInfo {
 
-	private final static String PACKAGE_NAME = "de.unimarburg.swt.emf.metric";
+	private final static String PACKAGE_NAME = "org.eclipse.emf.refactor.metrics";
 	private String name;
 	private String description;
 	private String project;
@@ -16,6 +16,7 @@ public class MetricInfo {
 	private String id;
 	
 	private String jar;
+	private String importPackage;
 	
 	
 	/**
@@ -29,10 +30,11 @@ public class MetricInfo {
 	 * @param context
 	 * @param valueType
 	 * @param project
+	 * @param importPackage 
 	 */	
 	public MetricInfo(String name, String id, String description,
 			String metamodel, String context, String project,
-			String jar) {
+			String jar, String importPackage) {
 		this.name = name;
 		this.description = description;
 		this.project = project;
@@ -40,6 +42,7 @@ public class MetricInfo {
 		this.metamodel = metamodel;
 		this.id = id;
 		this.jar = jar;
+		this.importPackage = importPackage;
 	}
 	
 	/**
@@ -135,6 +138,14 @@ public class MetricInfo {
 
 	public void setJar(String jar) {
 		this.jar = jar;
+	}
+	
+	public void setImportPackage(String importPackage) {
+		this.importPackage = importPackage;
+	}
+	
+	public String getImportPackage() {
+		return this.importPackage;
 	}
 
 	@Override

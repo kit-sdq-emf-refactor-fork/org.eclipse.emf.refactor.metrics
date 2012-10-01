@@ -25,6 +25,7 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 	private String name, id, description, metamodel, context, jar;
 	private LinkedList<IProject> projects;
 	private IProject targetProject;
+	private String importPackage;
 
 	public NewMetricWizardJava() { }
 
@@ -86,7 +87,7 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 	private MetricInfo getMetricInfo(){
 		String proj = this.targetProject.getLocation().toString();
 		MetricInfo info = new MetricInfo(this.name, this.id, this.description, 
-							this.metamodel, this.context, proj, getJar());
+							this.metamodel, this.context, proj, getJar(), importPackage);
 		return info;
 	}
 	
@@ -154,5 +155,13 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 	public WizardPage getSecondPage() {
 		return null;
 	}
+	
+	@Override
+	public void setImportPackage(String importPackage) {
+		this.importPackage = importPackage;
+	}
+
+	@Override
+	public void updateSecondPage() { }
 
 }

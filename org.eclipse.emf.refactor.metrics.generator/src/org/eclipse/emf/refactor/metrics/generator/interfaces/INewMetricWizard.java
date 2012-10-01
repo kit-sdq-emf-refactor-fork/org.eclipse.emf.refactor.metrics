@@ -27,4 +27,8 @@ public interface INewMetricWizard {
 	
 	public WizardPage getSecondPage();
 
+	public void setImportPackage(String importPackage);
+	
+	public void updateSecondPage();
+
 }

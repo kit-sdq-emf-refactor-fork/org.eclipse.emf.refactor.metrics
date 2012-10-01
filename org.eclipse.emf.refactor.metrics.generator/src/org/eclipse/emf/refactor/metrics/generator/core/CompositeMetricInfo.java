@@ -30,10 +30,11 @@ public class CompositeMetricInfo extends MetricInfo  {
 	 * @param firstMetric
 	 * @param secondMetric
 	 * @param operation
+	 * @param importPackage 
 	 */
 	public CompositeMetricInfo(String name, String id, String description, String metamodel, String context, String project, 
-								Metric firstMetric, Metric secondMetric, IOperation operation, String jar) {
-		super(name, id, description, metamodel, context, project, jar);
+								Metric firstMetric, Metric secondMetric, IOperation operation, String jar, String importPackage) {
+		super(name, id, description, metamodel, context, project, jar, importPackage);
 		this.firstMetric = firstMetric;
 		this.secondMetric = secondMetric;
 		this.operation = operation;

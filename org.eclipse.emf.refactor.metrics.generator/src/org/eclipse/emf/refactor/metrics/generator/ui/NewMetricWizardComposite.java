@@ -30,6 +30,7 @@ public class NewMetricWizardComposite extends Wizard implements INewWizard, INew
 	private String name, id, description, metamodel, context, jar;
 	private LinkedList<IProject> projects;
 	private IProject targetProject;
+	private String importPackage;
 
 	public NewMetricWizardComposite() { }
 
@@ -98,7 +99,8 @@ public class NewMetricWizardComposite extends Wizard implements INewWizard, INew
 		String operationName = compositePage.getOperationName();
 		IOperation operation = MetricManager.getOperation(operationName);
 		CompositeMetricInfo info = new CompositeMetricInfo(this.name, this.id, this.description, 
-						this.metamodel, this.context, proj, first, second, operation, getJar());
+						this.metamodel, this.context, proj, first, second, operation, 
+						getJar(), importPackage);
 		return info;
 	}
 	
@@ -169,6 +171,16 @@ public class NewMetricWizardComposite extends Wizard implements INewWizard, INew
 	@Override
 	public WizardPage getSecondPage() {
 		return this.compositePage;
+	}
+
+	@Override
+	public void setImportPackage(String importPackage) {
+		this.importPackage = importPackage;
+	}
+
+	@Override
+	public void updateSecondPage() {
+		compositePage.fillTables();
 	}
 
 }

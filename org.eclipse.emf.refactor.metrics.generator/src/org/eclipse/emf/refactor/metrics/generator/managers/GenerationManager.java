@@ -95,10 +95,17 @@ public class GenerationManager {
 	}
 	
 	private List<IClasspathEntry> setClassPathEntries() {
-	    Bundle bundle = Platform.getBundle(Activator.PLUGIN_ID);
-	    String version = (String) bundle.getHeaders().get(BUNDLEVERSION);
 	    List<IClasspathEntry> cpe = new ArrayList<IClasspathEntry>();
-	    cpe.add(JavaCore.newLibraryEntry(new Path(PLUGINSPATH+ Activator.PLUGIN_ID + "_" + version + ".jar"), null, null));
+	    Bundle bundle = Platform.getBundle(Activator.PLUGIN_ID);
+	    // add org.eclipse.emf.refactor.metrics.generator to class path
+	    String version = (String) bundle.getHeaders().get(BUNDLEVERSION);
+	    cpe.add(JavaCore.newLibraryEntry(new Path(PLUGINSPATH + 
+	    		Activator.PLUGIN_ID + "_" + version + ".jar"), null, null));
+	    // add org.eclipse.emf.refactor.metrics to class path
+	    bundle = Platform.getBundle(org.eclipse.emf.refactor.metrics.Activator.PLUGIN_ID);
+	    version = (String) bundle.getHeaders().get(BUNDLEVERSION);
+	    cpe.add(JavaCore.newLibraryEntry(new Path(PLUGINSPATH + 
+	    		org.eclipse.emf.refactor.metrics.Activator.PLUGIN_ID + "_" + version + ".jar"), null, null));	    
 		return cpe;
 	}
 	
