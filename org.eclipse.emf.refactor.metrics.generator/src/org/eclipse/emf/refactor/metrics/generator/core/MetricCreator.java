@@ -10,7 +10,6 @@ import org.eclipse.emf.refactor.metrics.interfaces.IMetricCalculator;
 
 public class MetricCreator {
 
-
 	public static LinkedList<Metric> loadMetrics() {
 		LinkedList<Metric> metrics = new LinkedList<Metric>();
 		IConfigurationElement[] rawMetrics = Platform.getExtensionRegistry()
