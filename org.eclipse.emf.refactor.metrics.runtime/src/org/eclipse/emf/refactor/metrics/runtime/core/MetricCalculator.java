@@ -57,8 +57,10 @@ public class MetricCalculator {
 		LinkedList<Metric> metricsToCalculate = configuration.getSelectedMetrics();
 		results.clear();
 		for (Metric metric : metricsToCalculate) {
-				if(metric.getContext().equals(context.get(0).eClass().getInstanceClassName()))
-					results.add(calculateMetric(metric));
+			if(metric.getContext().equals(context.get(0).eClass().getInstanceClass().getSimpleName())) { 
+				System.out.println("Calculate metric '" + metric.getName() + "' on element '" + metric.getContext());
+				results.add(calculateMetric(metric));
+			}
 		}
 	}
 	
