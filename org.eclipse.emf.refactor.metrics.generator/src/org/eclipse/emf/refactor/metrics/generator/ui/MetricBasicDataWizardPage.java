@@ -30,7 +30,7 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 	private Text nameTextField, idTextField, descriptionTextField;
 	private Combo projectCombo, metamodelCombo, contextCombo;
 	private String jar = "";
-	private String importPackage;
+	private String importPackage, metaModel, contextType;
 	
 	@Override
 	public void createControl(Composite parent) {
@@ -40,6 +40,14 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 		container.setLayout(layout);
 		createTextFields(container);
 		initProjectsAndMetamodels();
+		System.out.println("vorher");
+		if (metaModel != null && ! metaModel.isEmpty() 
+				&& contextType != null && ! contextType.isEmpty()) {
+			System.out.println("drin");
+			setFixedMetamodel(metaModel);
+			setFixedContext(contextType);
+		}
+		System.out.println("nachher");
 		setControl(container);
 		this.setPageComplete(false);
 	}	
@@ -215,6 +223,44 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 			metamodelCombo.add(object.toString());
 		}
 	}
+	
+	private void setFixedMetamodel(String metaModel) {
+		for (String mm : metamodelCombo.getItems()) {
+			if (mm.equals(metaModel)) {
+				metamodelCombo.removeAll();
+				metamodelCombo.setItems(new String[] {metaModel});
+				metamodelCombo.select(0);
+				metamodelCombo.setEnabled(false);
+				EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(metaModel);
+				importPackage = ePackage.getClass().getPackage().getName();
+				if (importPackage.endsWith(".impl")) {
+					int length = importPackage.length();
+					importPackage = importPackage.substring(0, length-5);
+				}
+				System.out.println("importPackage: " + importPackage);
+				File jarFile;
+				try {
+					jarFile = new File
+							(ePackage.getClass().getProtectionDomain()
+							.getCodeSource().getLocation().toURI());
+					String jarName = jarFile.getName();
+					int index = jarName.indexOf("_");
+					jar = jarName.substring(0, index);
+					System.out.println("Jar5: " + jar);
+				} catch (URISyntaxException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+	}
+	
+	private void setFixedContext(String context) {
+		contextCombo.removeAll();
+		contextCombo.setItems(new String[] {context});
+		contextCombo.select(0);
+		contextCombo.setEnabled(false);
+	}
 
 	/**
 	 * Wird jedes mal ausgeführ wenn sich der Inhalt eines Textfeldes im Wizard
@@ -262,6 +308,14 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 		((INewMetricWizard) getWizard()).setContext(this.contextCombo.getText());
 		((INewMetricWizard) getWizard()).setJar(jar);
 		((INewMetricWizard) getWizard()).setImportPackage(importPackage);
+	}
+
+	public void setMetamodel(String metaModel) {
+		this.metaModel = metaModel;
+	}
+
+	public void setContextType(String contextType) {
+		this.contextType = contextType;
 	}
 
 }

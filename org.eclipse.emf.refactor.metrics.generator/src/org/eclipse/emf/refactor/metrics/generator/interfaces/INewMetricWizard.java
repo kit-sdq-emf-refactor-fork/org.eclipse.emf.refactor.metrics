@@ -30,5 +30,7 @@ public interface INewMetricWizard {
 	public void setImportPackage(String importPackage);
 	
 	public void updateSecondPage();
+	
+	public void setMetamodelAndContext(String metamodel, String contextType);
 
 }

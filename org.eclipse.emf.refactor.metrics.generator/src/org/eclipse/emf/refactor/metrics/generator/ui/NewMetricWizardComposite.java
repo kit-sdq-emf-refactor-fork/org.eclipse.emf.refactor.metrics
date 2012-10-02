@@ -33,6 +33,11 @@ public class NewMetricWizardComposite extends Wizard implements INewWizard, INew
 	private String importPackage;
 
 	public NewMetricWizardComposite() { }
+	
+	public NewMetricWizardComposite(String metaModel, String contextType) {
+		metamodel = metaModel;
+		context = contextType;
+	}
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -43,6 +48,10 @@ public class NewMetricWizardComposite extends Wizard implements INewWizard, INew
 	public void addPages() {
 		setWindowTitle(WINDOW_TITLE);
 		basicDataPage = new MetricBasicDataWizardPage();
+		if (metamodel != null && ! metamodel.isEmpty() 
+				&& context != null && ! context.isEmpty()) {
+			setMetamodelAndContext(metamodel, context);
+		}
 		addPage(basicDataPage);
 		compositePage = new CompositeDataWizardPage();
 		addPage(compositePage);
@@ -181,6 +190,12 @@ public class NewMetricWizardComposite extends Wizard implements INewWizard, INew
 	@Override
 	public void updateSecondPage() {
 		compositePage.fillTables();
+	}
+	
+	@Override
+	public void setMetamodelAndContext(String metamodel, String contextType) {
+		basicDataPage.setMetamodel(metamodel);
+		basicDataPage.setContextType(contextType);
 	}
 
 }

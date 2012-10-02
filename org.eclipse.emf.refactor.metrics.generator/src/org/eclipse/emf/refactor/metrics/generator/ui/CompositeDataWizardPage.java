@@ -25,7 +25,7 @@ public class CompositeDataWizardPage extends WizardPage {
 	private static final String PAGE_NAME = "org.eclipse.emf.refactor.metrics.CompositeDataWizardPage";
 	private static final String TITLE = "New Metric: Composite Data";
 	private static final String DESCRIPTION = "Please specify two input metrics and a join operation " +
-			"for the new metric. Required fields are denoted by \"(*)\".";
+			"for the new metric.";
 	private TableViewer viewer;
 	private Table firstMetricTable, secondMetricTable;
 	private TableItemsMapping firstTableMapping, secondTableMapping;

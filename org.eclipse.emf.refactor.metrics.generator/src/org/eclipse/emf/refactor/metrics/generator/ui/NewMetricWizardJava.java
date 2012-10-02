@@ -26,8 +26,13 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 	private LinkedList<IProject> projects;
 	private IProject targetProject;
 	private String importPackage;
-
+	
 	public NewMetricWizardJava() { }
+
+	public NewMetricWizardJava(String metaModel, String contextType) {
+		metamodel = metaModel;
+		context = contextType;
+	}
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -38,6 +43,10 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 	public void addPages() {
 		setWindowTitle(WINDOW_TITLE);
 		basicDataPage = new MetricBasicDataWizardPage();
+		if (metamodel != null && ! metamodel.isEmpty() 
+				&& context != null && ! context.isEmpty()) {
+			setMetamodelAndContext(metamodel, context);
+		}
 		addPage(basicDataPage);
 	}
 	
@@ -163,5 +172,11 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 
 	@Override
 	public void updateSecondPage() { }
+
+	@Override
+	public void setMetamodelAndContext(String metamodel, String contextType) {
+		basicDataPage.setMetamodel(metamodel);
+		basicDataPage.setContextType(contextType);
+	}
 
 }
