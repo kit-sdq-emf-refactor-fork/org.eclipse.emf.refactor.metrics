@@ -18,20 +18,6 @@ public class MetricInfo {
 	private String jar;
 	private String importPackage;
 	
-	
-	/**
-	 * The constructor that creates a new metricInfo containing information about the metric,
-	 * that is to be generated.
-	 * 
-	 * @param name
-	 * @param id
-	 * @param description
-	 * @param metamodel
-	 * @param context
-	 * @param valueType
-	 * @param project
-	 * @param importPackage 
-	 */	
 	public MetricInfo(String name, String id, String description,
 			String metamodel, String context, String project,
 			String jar, String importPackage) {
