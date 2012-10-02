@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.henshin.interpreter;bundle-version="0.9.2"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.emf.refactor.metrics.henshin.managers

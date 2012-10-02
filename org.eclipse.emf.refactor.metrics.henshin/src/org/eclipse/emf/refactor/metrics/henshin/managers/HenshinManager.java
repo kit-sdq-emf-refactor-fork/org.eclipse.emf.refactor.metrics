@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.henshin;
+package org.eclipse.emf.refactor.metrics.henshin.managers;
 
 import java.util.List;
 
