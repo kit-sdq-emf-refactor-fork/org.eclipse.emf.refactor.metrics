@@ -18,7 +18,6 @@ import org.eclipse.emf.refactor.metrics.henshin.Activator;
 import org.eclipse.emf.refactor.metrics.henshin.core.HenshinMetricInfo;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.osgi.framework.Bundle;
 
 public class HenshinGenerationManager extends GenerationManager {
