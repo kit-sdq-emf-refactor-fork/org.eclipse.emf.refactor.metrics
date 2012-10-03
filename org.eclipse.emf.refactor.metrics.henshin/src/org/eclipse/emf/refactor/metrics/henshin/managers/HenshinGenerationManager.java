@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.henshin;
+package org.eclipse.emf.refactor.metrics.henshin.managers;
 
 import java.util.List;
 
@@ -11,6 +11,8 @@ import org.eclipse.emf.codegen.jet.JETException;
 import org.eclipse.emf.refactor.metrics.generator.managers.DependenciesManager;
 import org.eclipse.emf.refactor.metrics.generator.managers.GenerationManager;
 import org.eclipse.emf.refactor.metrics.generator.managers.XMLPluginFileManager;
+import org.eclipse.emf.refactor.metrics.henshin.Activator;
+import org.eclipse.emf.refactor.metrics.henshin.core.HenshinMetricInfo;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.JavaCore;
 import org.osgi.framework.Bundle;

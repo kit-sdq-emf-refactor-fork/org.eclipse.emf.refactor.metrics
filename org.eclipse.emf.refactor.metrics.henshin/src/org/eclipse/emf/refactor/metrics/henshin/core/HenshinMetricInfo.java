@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.henshin;																
+package org.eclipse.emf.refactor.metrics.henshin.core;																
 
 import org.eclipse.emf.refactor.metrics.generator.core.MetricInfo;
 

@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.henshin;
+package org.eclipse.emf.refactor.metrics.henshin.ui;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.refactor.metrics.generator.interfaces.INewMetricWizard;
 import org.eclipse.emf.refactor.metrics.generator.managers.GenerationManager;
 import org.eclipse.emf.refactor.metrics.generator.ui.MetricBasicDataWizardPage;
+import org.eclipse.emf.refactor.metrics.henshin.core.HenshinMetricInfo;
 import org.eclipse.emf.refactor.metrics.managers.MetricManager;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
