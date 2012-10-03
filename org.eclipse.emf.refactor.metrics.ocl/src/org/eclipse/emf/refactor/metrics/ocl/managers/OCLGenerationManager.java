@@ -65,9 +65,9 @@ public class OCLGenerationManager extends GenerationManager {
 		}
 	}
 	
-	private static void createCalculateClass(IProgressMonitor monitor, HenshinMetricInfo metricInfo) {
+	private static void createCalculateClass(IProgressMonitor monitor, OCLMetricInfo metricInfo) {
 		String generatedCode = "";
-		String templateName = HENSHIN_TEMPLATE_CLASS_NAME;
+		String templateName = OCL_TEMPLATE_CLASS_NAME;
 		try {
 //			MessageDialog.openError(null, null, "vor generateCode()");
 			generatedCode = generateCode(monitor, templateName, metricInfo);
@@ -94,7 +94,7 @@ public class OCLGenerationManager extends GenerationManager {
 		return directory;
 	}
 	
-	protected static String generateCode(IProgressMonitor monitor, String template, HenshinMetricInfo metricInfo) {
+	protected static String generateCode(IProgressMonitor monitor, String template, OCLMetricInfo metricInfo) {
 		String templatePath = templateDirectory + template + TEMPLATE_FILE_EXTENSION;
 		ClassLoader classLoader = metricInfo.getClass().getClassLoader();
 		JETEmitter jetEmitter = new JETEmitter(templatePath, classLoader);
