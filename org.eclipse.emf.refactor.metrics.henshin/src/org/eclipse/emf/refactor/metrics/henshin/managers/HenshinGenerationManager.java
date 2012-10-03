@@ -19,6 +19,7 @@ import org.osgi.framework.Bundle;
 public class HenshinGenerationManager extends GenerationManager {
 	
 	private static final String HENSHIN_TEMPLATE_CLASS_NAME = "HenshinCalculateClassTemplate";
+	private static HenshinGenerationManager instance;
 	
 	private HenshinGenerationManager() {
 		templateDirectory = setTemplateDirectory();
@@ -30,7 +31,7 @@ public class HenshinGenerationManager extends GenerationManager {
 		if (instance == null) {
 			instance = new HenshinGenerationManager();
 		}
-		return (HenshinGenerationManager) instance;
+		return instance;
 	}
 	
 	protected List<IClasspathEntry> setClassPathEntries() {
