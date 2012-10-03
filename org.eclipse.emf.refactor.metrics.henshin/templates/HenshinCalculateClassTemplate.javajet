@@ -1,5 +1,5 @@
 <%@ jet package="org.eclipse.emf.refactor.metrics" class="HenshinCalculateClass"
-imports="org.eclipse.emf.refactor.metrics.henshin.generator.HenshinMetricInfo"%>
+imports="org.eclipse.emf.refactor.metrics.henshin.core.HenshinMetricInfo"%>
 <%HenshinMetricInfo info = (HenshinMetricInfo) argument; %>
 package <%=info.getPackage()%>;
 

@@ -9,9 +9,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.refactor.metrics.generator.interfaces.INewMetricWizard;
-import org.eclipse.emf.refactor.metrics.generator.managers.GenerationManager;
 import org.eclipse.emf.refactor.metrics.generator.ui.MetricBasicDataWizardPage;
 import org.eclipse.emf.refactor.metrics.henshin.core.HenshinMetricInfo;
+import org.eclipse.emf.refactor.metrics.henshin.managers.HenshinGenerationManager;
 import org.eclipse.emf.refactor.metrics.managers.MetricManager;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -66,8 +66,8 @@ public class NewMetricWizardHenshin extends Wizard implements INewWizard, INewMe
 		try{
 			getContainer().run(true, true, new IRunnableWithProgress(){
 				public void run(IProgressMonitor monitor)throws InvocationTargetException, InterruptedException{
-					GenerationManager.getInstance();
-					GenerationManager.createNewMetric(monitor, getMetricInfo(), targetProject);
+					HenshinGenerationManager.getInstance();
+					HenshinGenerationManager.createNewMetric(monitor, getMetricInfo(), targetProject);
 				}
 			});
 		}
