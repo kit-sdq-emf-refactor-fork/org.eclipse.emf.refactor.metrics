@@ -8,7 +8,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.jet.JETException;
-import org.eclipse.emf.refactor.metrics.generator.managers.DependenciesManager;
 import org.eclipse.emf.refactor.metrics.generator.managers.GenerationManager;
 import org.eclipse.emf.refactor.metrics.generator.managers.XMLPluginFileManager;
 import org.eclipse.emf.refactor.metrics.henshin.Activator;
@@ -47,7 +46,7 @@ public class HenshinGenerationManager extends GenerationManager {
 	public static void createNewMetric(IProgressMonitor monitor,
 			HenshinMetricInfo metricInfo, IProject targetProject) {
 		System.out.println(metricInfo);
-		DependenciesManager.updateDependencies(metricInfo);
+		HenshinDependenciesManager.updateDependencies(metricInfo);
 		createCalculateClass(monitor, metricInfo);		
 		XMLPluginFileManager.createMetricEntry(metricInfo.getProjectPath(), 
 				metricInfo.getName(), metricInfo.getId(), 
