@@ -90,7 +90,9 @@ public class HenshinDataWizardPage extends WizardPage implements Listener {
 	protected void initContents() {
 		IProject project = ((NewMetricWizardHenshin) getWizard()).getTargetProject();
 		String path = project.getLocationURI().getPath() + NewMetricWizardHenshin.TRANSFORMATIONS_DIR;
+		System.out.println("vor setCombos()");
 		setCombos(HenshinFileManager.getAllHenshinFiles(path));
+		System.out.println("nach setCombos()");
 	}
 
 	private void setCombos(File[] files) {

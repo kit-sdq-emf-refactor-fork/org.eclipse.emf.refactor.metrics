@@ -173,6 +173,7 @@ public class NewMetricWizardHenshin extends Wizard implements INewWizard, INewMe
 
 	@Override
 	public WizardPage getSecondPage() {
+		henshinPage.initContents();
 		return this.henshinPage;
 	}
 
@@ -182,9 +183,7 @@ public class NewMetricWizardHenshin extends Wizard implements INewWizard, INewMe
 	}
 
 	@Override
-	public void updateSecondPage() {
-		henshinPage.initContents();
-	}
+	public void updateSecondPage() { }
 	
 	@Override
 	public void setMetamodelAndContext(String metamodel, String contextType) {
