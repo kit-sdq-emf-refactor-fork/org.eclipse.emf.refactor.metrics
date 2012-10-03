@@ -14,10 +14,10 @@ import org.eclipse.emf.refactor.metrics.generator.core.MetricInfo;
 
 public class DependenciesManager {
 
-	private final static String ECORE = "org.eclipse.emf.ecore";
-	private final static String REFACTOR_METRICS = "org.eclipse.emf.refactor.metrics";
-	private final static String REQ_BUNDLE = "Require-Bundle";
-	private final static String MANIFEST_FILE = "/META-INF/MANIFEST.MF";
+	protected final static String ECORE = "org.eclipse.emf.ecore";
+	protected final static String REFACTOR_METRICS = "org.eclipse.emf.refactor.metrics";
+	protected final static String REQ_BUNDLE = "Require-Bundle";
+	protected final static String MANIFEST_FILE = "/META-INF/MANIFEST.MF";
 	
 	public static void updateDependencies(MetricInfo info) {
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(info.getProjectName());
