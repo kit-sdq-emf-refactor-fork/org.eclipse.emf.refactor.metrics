@@ -31,9 +31,9 @@ public class GenerationManager {
 	private static GenerationManager instance;
 	private static final String COMPOSITE_TEMPLATE_CLASS_NAME = "CompositeCalculateClassTemplate";
 	private static final String SKELETON_TEMPLATE_CLASS_NAME = "CalculateClassTemplate";
-	private static final  String TEMPLATE_DIR = "/templates";
+	protected static final  String TEMPLATE_DIR = "/templates";
 	private static final String SOURCE_DIR = "/src/";
-	private static final  String TEMPLATE_FILE_EXTENSION = ".javajet";
+	protected static final  String TEMPLATE_FILE_EXTENSION = ".javajet";
 	private static final String JAVA_FILE_EXTENSION = ".java";
 	protected static final String PLUGINSPATH = Platform.getInstallLocation().getURL().getPath() + "plugins/";
 	protected static final String BUNDLEVERSION = "Bundle-Version";
@@ -109,7 +109,7 @@ public class GenerationManager {
 		return cpe;
 	}
 	
-	protected static String generateCode(IProgressMonitor monitor, String template, MetricInfo metricInfo) {
+	private static String generateCode(IProgressMonitor monitor, String template, MetricInfo metricInfo) {
 		String templatePath = templateDirectory + template + TEMPLATE_FILE_EXTENSION;
 		ClassLoader classLoader = metricInfo.getClass().getClassLoader();
 		JETEmitter jetEmitter = new JETEmitter(templatePath, classLoader);
@@ -149,7 +149,7 @@ public class GenerationManager {
 		return container;
 	}
 
-	protected String setTemplateDirectory() {
+	private String setTemplateDirectory() {
 		String directory = "";
 		final Bundle bundle = Activator.getDefault().getBundle();
 		try {
