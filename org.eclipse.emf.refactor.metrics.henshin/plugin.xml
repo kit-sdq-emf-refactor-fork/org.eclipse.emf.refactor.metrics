@@ -11,5 +11,44 @@
             name="Metric (specified in Henshin)">
       </wizard>
    </extension>
-
+   <extension
+         id="org.eclipse.emf.refactor.qa.menu"
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               id="org.eclipse.emf.refactor.runtime.menu"
+               label="EMF Quality Assurance">
+            <command
+                  commandId="org.eclipse.emf.refactor.metrics.henshin.generateNewMetricHenshinCommand"
+                  label="Generate New Metric (specified in Henshin)"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="true">
+                  <iterate
+                        ifEmpty="false">
+                     <instanceof
+                           value="org.eclipse.emf.ecore.EObject">
+                     </instanceof>
+                  </iterate>
+               </visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.eclipse.emf.refactor.metrics.henshin.generateNewMetricHenshinCommand"
+            name="GenerateNewMetricHenshinCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.emf.refactor.metrics.henshin.handler.GenerateNewMetricHenshinCommandHandler"
+            commandId="org.eclipse.emf.refactor.metrics.henshin.generateNewMetricHenshinCommand">
+      </handler>
+   </extension>
 </plugin>

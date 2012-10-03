@@ -26,7 +26,7 @@ public class HenshinDataWizardPage extends WizardPage implements Listener {
 	private static final String HENSHIN_EXT = ".henshin";
 	private static final String PAGE_NAME = "org.eclipse.emf.refactor.metrics.HenshinDataWizardPage";
 	private static final String TITLE = "New Metric: Henshin Data";
-	private static final String DESCRIPTION = "Please specify the corresponding Henshin transformation files.";
+	private static final String DESCRIPTION = "Please specify the corresponding Henshin transformation file.";
 	private Combo transformationCombo;
 	private String transformation;
 	
@@ -90,9 +90,7 @@ public class HenshinDataWizardPage extends WizardPage implements Listener {
 	protected void initContents() {
 		IProject project = ((NewMetricWizardHenshin) getWizard()).getTargetProject();
 		String path = project.getLocationURI().getPath() + NewMetricWizardHenshin.TRANSFORMATIONS_DIR;
-		System.out.println("vor setCombos()");
 		setCombos(HenshinFileManager.getAllHenshinFiles(path));
-		System.out.println("nach setCombos()");
 	}
 
 	private void setCombos(File[] files) {
@@ -110,7 +108,7 @@ public class HenshinDataWizardPage extends WizardPage implements Listener {
 	 */
 	private void updatePageComplete() {
 		if (!checkTransformationTextField()) {
-			setMessage("Metric-Calculation file not specified, " +
+			setMessage("Metric calculation file not specified, " +
 									"or file does not exist.", ERROR);
 			this.setPageComplete(false);
 			getWizard().getContainer().updateButtons();
