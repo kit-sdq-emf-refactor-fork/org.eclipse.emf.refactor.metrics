@@ -51,7 +51,7 @@ public class OCLGenerationManager extends GenerationManager {
 	public static void createNewMetric(IProgressMonitor monitor,
 			OCLMetricInfo metricInfo, IProject targetProject) {
 		System.out.println(metricInfo);
-		HenshinDependenciesManager.updateDependencies(metricInfo);
+		OCLDependenciesManager.updateDependencies(metricInfo);
 		createCalculateClass(monitor, metricInfo);		
 		XMLPluginFileManager.createMetricEntry(metricInfo.getProjectPath(), 
 				metricInfo.getName(), metricInfo.getId(), 
