@@ -28,7 +28,7 @@ import org.osgi.framework.Bundle;
 
 public class GenerationManager {
 	
-	protected static GenerationManager instance;
+	private static GenerationManager instance;
 	private static final String COMPOSITE_TEMPLATE_CLASS_NAME = "CompositeCalculateClassTemplate";
 	private static final String SKELETON_TEMPLATE_CLASS_NAME = "CalculateClassTemplate";
 	private static final  String TEMPLATE_DIR = "/templates";
