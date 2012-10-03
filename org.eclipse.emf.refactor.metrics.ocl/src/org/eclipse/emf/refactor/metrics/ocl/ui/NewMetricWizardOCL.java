@@ -22,7 +22,6 @@ import org.eclipse.ui.IWorkbench;
 
 public class NewMetricWizardOCL extends Wizard implements INewWizard, INewMetricWizard {
 	
-	protected static final String TRANSFORMATIONS_DIR = "/transformations/";
 	private final String WINDOW_TITLE = "New Metric";
 	private MetricBasicDataWizardPage basicDataPage;
 	private OCLDataWizardPage oclPage;
