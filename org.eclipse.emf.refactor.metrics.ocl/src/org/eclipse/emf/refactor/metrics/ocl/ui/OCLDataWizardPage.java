@@ -34,7 +34,6 @@ public class OCLDataWizardPage extends WizardPage implements Listener{
 		layout.numColumns = 1;
 		container.setLayout(layout);
 		createTextFields(container);
-//		initContents();
 		setControl(container);
 		this.setPageComplete(false);
 
@@ -49,7 +48,7 @@ public class OCLDataWizardPage extends WizardPage implements Listener{
 		GridData gridData;
 		Group group;
 		GridLayout layout;
-		// - Metric Data -
+		// - OCL Data -
 		group = new Group(container, SWT.NONE);
 		group.setText("OCL");
 	    layout = new GridLayout();
@@ -60,12 +59,10 @@ public class OCLDataWizardPage extends WizardPage implements Listener{
 		// - Name -
 		// col:1
 		label = new Label(group, SWT.NONE);
-		label.setText("OCL Expression:");
+		label.setText("OCL expression:  ");
 		label.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END | GridData.VERTICAL_ALIGN_BEGINNING));
 		// col:2
 		oclExpressionTextField  = new StyledText(group, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
-		//new Text(group, SWT.BORDER);
-//		oclExpressionTextField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		oclExpressionTextField.setLayoutData(new GridData(GridData.FILL_BOTH | GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL));
 		oclExpressionTextField.addListener(SWT.Modify, this);
 		oclExpressionTextField.setText("self.");

@@ -5,11 +5,51 @@
          point="org.eclipse.ui.newWizards">
       <wizard
             category="org.eclipse.emf.refactor.newwizards.category"
-            class="org.eclipse.emf.refactor.metrics.henshin.ui.NewMetricWizardOCL"
+            class="org.eclipse.emf.refactor.metrics.ocl.ui.NewMetricWizardOCL"
             icon="icons/newmetric.PNG"
             id="org.eclipse.emf.refactor.metrics.newwizard"
-            name="Metric (specified in Henshin)">
+            name="Metric (specified in OCL)">
       </wizard>
+   </extension>
+   <extension
+         id="org.eclipse.emf.refactor.qa.menu"
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               id="org.eclipse.emf.refactor.runtime.menu"
+               label="EMF Quality Assurance">
+            <command
+                  commandId="org.eclipse.emf.refactor.metrics.henshin.generateNewMetricOCLCommand"
+                  label="Generate New Metric (specified in OCL)"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="true">
+                  <iterate
+                        ifEmpty="false">
+                     <instanceof
+                           value="org.eclipse.emf.ecore.EObject">
+                     </instanceof>
+                  </iterate>
+               </visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.eclipse.emf.refactor.metrics.henshin.generateNewMetricOCLCommand"
+            name="GenerateNewMetricOCLCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.emf.refactor.metrics.ocl.handler.GenerateNewMetricOCLCommandHandler"
+            commandId="org.eclipse.emf.refactor.metrics.henshin.generateNewMetricOCLCommand">
+      </handler>
    </extension>
 
 </plugin>
