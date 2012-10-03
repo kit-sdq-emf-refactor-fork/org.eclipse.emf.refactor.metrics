@@ -28,19 +28,19 @@ import org.osgi.framework.Bundle;
 
 public class GenerationManager {
 	
-	private static GenerationManager instance;
+	protected static GenerationManager instance;
 	private static final String COMPOSITE_TEMPLATE_CLASS_NAME = "CompositeCalculateClassTemplate";
 	private static final String SKELETON_TEMPLATE_CLASS_NAME = "CalculateClassTemplate";
 	private static final  String TEMPLATE_DIR = "/templates";
 	private static final String SOURCE_DIR = "/src/";
 	private static final  String TEMPLATE_FILE_EXTENSION = ".javajet";
 	private static final String JAVA_FILE_EXTENSION = ".java";
-	private static final String PLUGINSPATH = Platform.getInstallLocation().getURL().getPath() + "plugins/";
-	private static final String BUNDLEVERSION = "Bundle-Version";
-	private static String templateDirectory;
-	private static List<IClasspathEntry> classpathEntries;
+	protected static final String PLUGINSPATH = Platform.getInstallLocation().getURL().getPath() + "plugins/";
+	protected static final String BUNDLEVERSION = "Bundle-Version";
+	protected static String templateDirectory;
+	protected static List<IClasspathEntry> classpathEntries;
 	
-	private GenerationManager() {
+	protected GenerationManager() {
 		templateDirectory = setTemplateDirectory();
 		classpathEntries = setClassPathEntries();
 		System.out.println("GenerationManager initialized!");
@@ -94,7 +94,7 @@ public class GenerationManager {
 		}
 	}
 	
-	private List<IClasspathEntry> setClassPathEntries() {
+	protected List<IClasspathEntry> setClassPathEntries() {
 	    List<IClasspathEntry> cpe = new ArrayList<IClasspathEntry>();
 	    Bundle bundle = Platform.getBundle(Activator.PLUGIN_ID);
 	    // add org.eclipse.emf.refactor.metrics.generator to class path
@@ -109,7 +109,7 @@ public class GenerationManager {
 		return cpe;
 	}
 	
-	private static String generateCode(IProgressMonitor monitor, String template, MetricInfo metricInfo) {
+	protected static String generateCode(IProgressMonitor monitor, String template, MetricInfo metricInfo) {
 		String templatePath = templateDirectory + template + TEMPLATE_FILE_EXTENSION;
 		ClassLoader classLoader = metricInfo.getClass().getClassLoader();
 		JETEmitter jetEmitter = new JETEmitter(templatePath, classLoader);
@@ -125,7 +125,7 @@ public class GenerationManager {
 		return result;
 	}
 	
-	private static void saveCode(IProgressMonitor monitor, String content, MetricInfo metricInfo) throws CoreException, JETException {
+	protected static void saveCode(IProgressMonitor monitor, String content, MetricInfo metricInfo) throws CoreException, JETException {
 		IContainer container = findOrCreatePackage(monitor, metricInfo);
 		if (container == null) {
 			throw new JETException("Could not find or create container for package " + metricInfo.getPackage() + " in " + metricInfo.getProjectName());
@@ -149,7 +149,7 @@ public class GenerationManager {
 		return container;
 	}
 
-	private String setTemplateDirectory() {
+	protected String setTemplateDirectory() {
 		String directory = "";
 		final Bundle bundle = Activator.getDefault().getBundle();
 		try {
