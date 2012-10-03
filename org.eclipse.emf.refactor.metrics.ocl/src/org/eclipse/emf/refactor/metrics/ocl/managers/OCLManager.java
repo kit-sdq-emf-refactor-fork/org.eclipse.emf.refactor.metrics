@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.ocl;
+package org.eclipse.emf.refactor.metrics.ocl.managers;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;

@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.ocl;
+package org.eclipse.emf.refactor.metrics.ocl.core;
 
 import org.eclipse.emf.refactor.metrics.generator.core.MetricInfo;
 
