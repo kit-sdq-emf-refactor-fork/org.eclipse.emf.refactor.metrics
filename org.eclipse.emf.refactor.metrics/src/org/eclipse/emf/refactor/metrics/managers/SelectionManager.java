@@ -19,6 +19,7 @@ public class SelectionManager {
 	}
 
 	public static List<EObject> getESelection(ISelection selection) {
+		System.out.println("selection: " + selection);
 		if (selection == null)
 			return null;
 		List<EObject> r = new ArrayList<EObject>();
@@ -32,6 +33,8 @@ public class SelectionManager {
 
 	@SuppressWarnings("unchecked")
 	public static Object[] getSelection(ISelection selection) {
+		System.out.println("selection instanceof StructuredSelection: " + 
+									(selection instanceof StructuredSelection));
 		if (null != selection) {
 			if (selection instanceof StructuredSelection) {
 				StructuredSelection ss = (StructuredSelection) selection;
