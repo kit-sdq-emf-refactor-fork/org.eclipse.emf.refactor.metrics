@@ -6,5 +6,5 @@ Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: org.eclipse.emf.refactor.metrics.reporter.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
-Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
