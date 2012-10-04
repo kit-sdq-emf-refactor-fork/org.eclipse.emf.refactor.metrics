@@ -1,24 +1,23 @@
 package org.eclipse.emf.refactor.metrics.runtime.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.refactor.metrics.runtime.managers.RuntimeManager;
 import org.eclipse.emf.refactor.metrics.runtime.ui.actions.ClearAction;
 import org.eclipse.emf.refactor.metrics.runtime.ui.actions.SaveAction;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
@@ -33,6 +32,9 @@ public class MetricResultsView extends ViewPart {
 	private static final String CONTEXT_COLUMN_LABEL = "Context";
 
 	private static final String TIME_COLUMN_LABEL = "Time";
+	
+	private static IMenuManager barMM;
+	private static IToolBarManager toolbarMM;
 
 	/**
 	 * The ID of the view as specified by the extension.
@@ -42,8 +44,13 @@ public class MetricResultsView extends ViewPart {
 	private Composite parent;
 	private SaveAction saveAction;
 	private Action clearAction;
+	private List<Action> additionalActions = new ArrayList<Action>();
 
 	public MetricResultsView() { }
+	
+	public void addAction(Action action) {
+		additionalActions.add(action);
+	}
 	
 	@Override
 	public void setFocus() {
@@ -86,23 +93,23 @@ public class MetricResultsView extends ViewPart {
 		viewer.setInput(RuntimeManager.getResultsViewInput());
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(),"EMFMetrics.viewer");
 		makeActions();
-		hookContextMenu();
+//		hookContextMenu();
 		//hookDoubleClickAction();
 		contributeToActionBars();
 	}
 
-	private void hookContextMenu() {
-		MenuManager menuMgr = new MenuManager("#PopupMenu");
-		menuMgr.setRemoveAllWhenShown(true);
-		menuMgr.addMenuListener(new IMenuListener() {
-			public void menuAboutToShow(IMenuManager manager) {
-				MetricResultsView.this.fillContextMenu(manager);
-			}
-		});
-		Menu menu = menuMgr.createContextMenu(viewer.getControl());
-		viewer.getControl().setMenu(menu);
-		getSite().registerContextMenu(menuMgr, viewer);
-	}
+//	private void hookContextMenu() {
+//		MenuManager menuMgr = new MenuManager("#PopupMenu");
+//		menuMgr.setRemoveAllWhenShown(true);
+//		menuMgr.addMenuListener(new IMenuListener() {
+//			public void menuAboutToShow(IMenuManager manager) {
+//				MetricResultsView.this.fillContextMenu(manager);
+//			}
+//		});
+//		Menu menu = menuMgr.createContextMenu(viewer.getControl());
+//		viewer.getControl().setMenu(menu);
+//		getSite().registerContextMenu(menuMgr, viewer);
+//	}
 
 	private void contributeToActionBars() {
 		IActionBars bars = getViewSite().getActionBars();
@@ -111,21 +118,38 @@ public class MetricResultsView extends ViewPart {
 	}
 
 	private void fillLocalPullDown(IMenuManager manager) {
+		barMM = manager;
 		manager.add(saveAction);
 		manager.add(clearAction);
 		manager.add(new Separator());
 	}
 
-	private void fillContextMenu(IMenuManager manager) {
-		manager.add(saveAction);
-		manager.add(clearAction);
-		// Other plug-ins can contribute there actions here
-		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-	}
+//	private void fillContextMenu(IMenuManager manager) {
+//		contextMM = manager;
+//		manager.add(saveAction);
+//		manager.add(clearAction);
+//		// Other plug-ins can contribute there actions here
+////		for (Action action : additionalActions) {
+////			manager.add(action);
+////		}
+//		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+//	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
+		toolbarMM = manager;
 		manager.add(saveAction);
 		manager.add(clearAction);
+	}
+	
+	public void addActionsToMenu() {
+		for (Action action : additionalActions) {	
+			if (toolbarMM.getItems().length != additionalActions.size()+2) {
+				barMM.add(action);
+				toolbarMM.add(action);
+				toolbarMM.update(true);
+			}
+		}
+		additionalActions.clear();
 	}
 
 	private void makeActions() {

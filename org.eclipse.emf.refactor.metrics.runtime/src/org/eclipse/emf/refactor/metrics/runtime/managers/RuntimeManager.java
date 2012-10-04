@@ -16,6 +16,7 @@ import org.eclipse.emf.refactor.metrics.configuration.managers.ConfigurationMana
 import org.eclipse.emf.refactor.metrics.runtime.core.MetricCalculator;
 import org.eclipse.emf.refactor.metrics.runtime.core.Result;
 import org.eclipse.emf.refactor.metrics.runtime.ui.MetricResultsView;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TableViewer;
 
 public class RuntimeManager {
@@ -23,21 +24,29 @@ public class RuntimeManager {
 	private static MetricCalculator calculator;
 	private static LinkedList<Result> resultsViewInput;
 	private static TableViewer resultsViewer = null;
+	private static List<Action> additionalActions = new ArrayList<Action>();
 	
 	private static RuntimeManager instance;
 	
 	private RuntimeManager() {
 		calculator = MetricCalculator.getInstance();
 		resultsViewInput = new LinkedList<Result>();
-//		if (! isMetricsViewOpen()) {
-//			createMetricsView();
-//		}
 		System.out.println("RuntimeManager initialized!");
 	}
 	
 	public static RuntimeManager getInstance() {
 		if (instance == null) {
 			instance = new RuntimeManager();
+		}
+		return instance;
+	}
+	
+	public static RuntimeManager getInstance(Action action) {
+		if (instance == null) {
+			instance = new RuntimeManager();
+			additionalActions.add(action);
+		} else {
+			additionalActions.add(action);
 		}
 		return instance;
 	}
@@ -105,19 +114,38 @@ public class RuntimeManager {
 		IWorkbenchPage page = win.getActivePage();
 		try{
 			page.showView(MetricResultsView.ID);
+			setAdditionalActionsToView(getMetricsView());
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private static boolean isMetricsViewOpen(){
+	private static MetricResultsView getMetricsView() {
 		IWorkbench wb = PlatformUI.getWorkbench();
 		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
 		IWorkbenchPage page = win.getActivePage();
-		for(int i=0; i<page.getViewReferences().length; i++){
-			if(page.getViewReferences()[i].getId().equals(MetricResultsView.ID))
-				return true;
+		for(int i=0; i<page.getViewReferences().length; i++) {
+			if(page.getViewReferences()[i].getId().equals(MetricResultsView.ID)) {
+				return ((MetricResultsView) page.getViewReferences()[i].getView(true));
+			}
+		}
+		return null;
+	}
+	
+	private static boolean isMetricsViewOpen() {
+		MetricResultsView view = getMetricsView();
+		if (view != null) {
+			setAdditionalActionsToView(view);
+			return true;
 		}
 		return false;
+	}
+
+	private static void setAdditionalActionsToView(MetricResultsView view) {
+		for (Action action : additionalActions) {
+			System.out.println("RuntimeManager: add action '" + action + "' to view!");
+			view.addAction(action);
+		}
+		view.addActionsToMenu();
 	}
 }
