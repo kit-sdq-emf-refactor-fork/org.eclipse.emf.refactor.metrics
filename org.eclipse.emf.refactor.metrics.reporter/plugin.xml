@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.ui.startup">
       <startup
-            class="org.eclipse.emf.refactor.metrics.reporter.ui.ReporterStartup">
+            class="org.eclipse.emf.refactor.metrics.reporter.ReporterStartup">
       </startup>
    </extension>
 

@@ -1,4 +1,4 @@
-package org.eclipse.emf.refactor.metrics.reporter.ui;
+package org.eclipse.emf.refactor.metrics.reporter;
 
 import org.eclipse.emf.refactor.metrics.reporter.actions.ExportAction;
 import org.eclipse.emf.refactor.metrics.runtime.managers.RuntimeManager;
