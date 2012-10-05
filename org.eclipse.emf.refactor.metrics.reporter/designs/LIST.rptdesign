@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.17" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.2.r232_20090202 Build &lt;2.3.2.v20090218-0730></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/simple_listing.gif</property>
+    <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.simplelisting</property>
+    <property name="layoutPreference">fixed layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="XmlUrl" id="27">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <text-property name="promptText">Please insert the URL of the XML source file</text-property>
+            <property name="controlType">text-box</property>
+            <property name="defaultValue">C:\Users\arendt\Desktop\results.xml</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="XML Data Source" id="28">
+            <method name="beforeOpen"><![CDATA[this.setExtensionProperty("FILELIST", params["XmlUrl"]);]]></method>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="Data Set" id="249">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">contextType</property>
+                </structure>
+                <structure>
+                    <property name="columnName">contextValue</property>
+                </structure>
+                <structure>
+                    <property name="columnName">date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">metricName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">metricDescription</property>
+                </structure>
+                <structure>
+                    <property name="columnName">resultValue</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">contextType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">contextValue</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">date</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">metricName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">metricDescription</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">resultValue</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">XML Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">contextType</property>
+                    <property name="nativeName">contextType</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">contextValue</property>
+                    <property name="nativeName">contextValue</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">date</property>
+                    <property name="nativeName">date</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">metricName</property>
+                    <property name="nativeName">metricName</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">metricDescription</property>
+                    <property name="nativeName">metricDescription</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">resultValue</property>
+                    <property name="nativeName">resultValue</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+            </list-property>
+            <property name="queryText">table0#-TNAME-#table0#:#[/results/context/metricResult/resultValue]#:#{contextType;STRING;../../contextType},{contextValue;STRING;../../contextValue},{date;STRING;../date},{metricName;STRING;../metricName},{metricDescription;STRING;../metricDescription},{resultValue;DOUBLE;}</property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>contextType</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>contextType</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>contextValue</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>contextValue</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>metricName</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>metricName</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>metricDescription</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>metricDescription</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>resultValue</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>resultValue</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>MAX_ROW</name>
+                    <value>-1</value>
+                </ex-property>
+                <ex-property>
+                    <name>XML_FILE</name>
+                </ex-property>
+            </list-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="24">
+            <property name="fontFamily">"Verdana"</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab" id="25">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab-cell" id="26">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="topMargin">0.25in</property>
+            <property name="leftMargin">0.25in</property>
+            <property name="bottomMargin">0.25in</property>
+            <property name="rightMargin">0.25in</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="245">
+            <property name="backgroundColor">#00366C</property>
+            <property name="fontFamily">"Papyrus"</property>
+            <property name="fontSize">x-large</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#FFFFFF</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">Metrics Report</text-property>
+        </label>
+        <table id="163">
+            <property name="fontFamily">"Papyrus"</property>
+            <property name="height">1.9083333333333334in</property>
+            <property name="width">7.975in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">contextType</property>
+                    <expression name="expression">dataSetRow["contextType"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">contextValue</property>
+                    <expression name="expression">dataSetRow["contextValue"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">metricName</property>
+                    <expression name="expression">dataSetRow["metricName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">metricDescription</property>
+                    <expression name="expression">dataSetRow["metricDescription"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">resultValue</property>
+                    <expression name="expression">dataSetRow["resultValue"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">date</property>
+                    <expression name="expression">dataSetRow["date"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <column id="187">
+                <property name="width">12%</property>
+            </column>
+            <column id="188">
+                <property name="width">15%</property>
+            </column>
+            <column id="189">
+                <property name="width">10%</property>
+            </column>
+            <column id="190">
+                <property name="width">35%</property>
+            </column>
+            <column id="254">
+                <property name="width">10%</property>
+            </column>
+            <column id="259">
+                <property name="width">18%</property>
+            </column>
+            <header>
+                <row id="311">
+                    <property name="height">0.225in</property>
+                    <property name="backgroundColor">#FFFFFF</property>
+                    <property name="color">#FFFFFF</property>
+                    <cell id="312"/>
+                    <cell id="313"/>
+                    <cell id="314"/>
+                    <cell id="315"/>
+                    <cell id="316"/>
+                    <cell id="317"/>
+                </row>
+                <row id="164">
+                    <property name="backgroundColor">#5C75FE</property>
+                    <property name="color">#FFFFFF</property>
+                    <property name="canShrink">false</property>
+                    <cell id="165">
+                        <label id="166">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Context Type</text-property>
+                        </label>
+                    </cell>
+                    <cell id="167">
+                        <label id="168">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Context Element</text-property>
+                        </label>
+                    </cell>
+                    <cell id="169">
+                        <label id="170">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Metric</text-property>
+                        </label>
+                    </cell>
+                    <cell id="171">
+                        <label id="172">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Metric Description</text-property>
+                        </label>
+                    </cell>
+                    <cell id="251">
+                        <label id="255">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Value</text-property>
+                        </label>
+                    </cell>
+                    <cell id="256">
+                        <label id="260">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Date</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="263">
+                <property name="groupName">ContextTypeGroup</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr">row["contextType"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue">row["contextType"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="318">
+                        <property name="height">3mm</property>
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="fontFamily">"Comic Sans MS"</property>
+                        <cell id="319"/>
+                        <cell id="320"/>
+                        <cell id="321"/>
+                        <cell id="322"/>
+                        <cell id="323"/>
+                        <cell id="324"/>
+                    </row>
+                    <row id="264">
+                        <property name="backgroundColor">#E3FFB0</property>
+                        <property name="fontFamily">"Comic Sans MS"</property>
+                        <cell id="265">
+                            <data id="278">
+                                <property name="resultSetColumn">contextType</property>
+                            </data>
+                        </cell>
+                        <cell id="266"/>
+                        <cell id="267"/>
+                        <cell id="268"/>
+                        <cell id="269"/>
+                        <cell id="270"/>
+                    </row>
+                </header>
+            </group>
+            <group id="291">
+                <property name="groupName">contextValueGroup</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr">row["contextValue"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue">row["contextValue"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="325">
+                        <property name="height">0.19166666666666668in</property>
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="fontFamily">"Comic Sans MS"</property>
+                        <property name="whiteSpace">nowrap</property>
+                        <cell id="326"/>
+                        <cell id="327"/>
+                        <cell id="328"/>
+                        <cell id="329"/>
+                        <cell id="330"/>
+                        <cell id="331"/>
+                    </row>
+                    <row id="292">
+                        <property name="backgroundColor">#FFFFCA</property>
+                        <property name="fontFamily">"Comic Sans MS"</property>
+                        <property name="whiteSpace">nowrap</property>
+                        <cell id="293"/>
+                        <cell id="294">
+                            <data id="306">
+                                <property name="display">inline</property>
+                                <property name="resultSetColumn">contextValue</property>
+                            </data>
+                        </cell>
+                        <cell id="295"/>
+                        <cell id="296"/>
+                        <cell id="297"/>
+                        <cell id="298"/>
+                    </row>
+                </header>
+            </group>
+            <detail>
+                <row id="173">
+                    <property name="height">0.5in</property>
+                    <property name="backgroundColor">#CEE9FF</property>
+                    <property name="fontFamily">"Comic Sans MS"</property>
+                    <cell id="174"/>
+                    <cell id="176"/>
+                    <cell id="178">
+                        <data id="307">
+                            <property name="resultSetColumn">metricName</property>
+                        </data>
+                    </cell>
+                    <cell id="180">
+                        <data id="308">
+                            <property name="fontSize">smaller</property>
+                            <property name="widows">2</property>
+                            <property name="resultSetColumn">metricDescription</property>
+                        </data>
+                    </cell>
+                    <cell id="252">
+                        <data id="309">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">resultValue</property>
+                        </data>
+                    </cell>
+                    <cell id="257">
+                        <data id="310">
+                            <property name="fontSize">smaller</property>
+                            <property name="resultSetColumn">date</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>
