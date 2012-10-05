@@ -34,6 +34,7 @@ import org.eclipse.emf.refactor.metrics.runtime.core.Result;
 import org.eclipse.emf.refactor.metrics.runtime.managers.XMLResultsManager;
 import org.eclipse.emf.refactor.metrics.runtime.ui.MetricResultsView;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -86,7 +87,7 @@ public class ReportManager {
 		} else {
 			System.out.println("Result: " + results.get(0));
 			System.out.println("Context: " + results.get(0).getContext().get(0));
-			System.out.println("eRessource: " + results.get(0).getContext().get(0).eResource());
+			System.out.println("eResource: " + results.get(0).getContext().get(0).eResource());
 			return results.get(0).getContext().get(0).eResource();
 		}
 	}
@@ -154,7 +155,7 @@ public class ReportManager {
 		}
 		if (! error.isEmpty()) {
 			String message = "The following designs (in your project) can not be added since they already exist:" + error;
-			MessageDialog.openInformation(shell, "EMF Metrics - Reporting -", message);
+			MessageDialog.openInformation(shell, "EMF Quality Assurance - Metrics Reporting -", message);
 		}
 	}
 
@@ -228,6 +229,7 @@ public class ReportManager {
 	public void doReport() {
 		// start
 		Cursor oldCursor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().getCursor();
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setCursor(new Cursor(null,SWT.CURSOR_WAIT));
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		fileName += "_" +  dateFormat.format(date);
@@ -260,16 +262,16 @@ public class ReportManager {
 			if (runAndRenderTask.validateParameters()) {
 				runTask(runAndRenderTask);				
 			} else {
-				String message = "EMF Metrics Reporting Error: Invalid Parameter Value '" + DESIGN_PARAMETER + "'";
-				MessageDialog.openInformation(shell, "EMF Metrics - Reporting -", message);
+				String message = "Metrics Reporting Error: Invalid Parameter Value '" + DESIGN_PARAMETER + "'";
+				MessageDialog.openInformation(shell, "EMF Quality Assurance - Metrics Reporting -", message);
 			}
 			runAndRenderTask.close();
 			MessageDialog.openInformation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
-					"EMF Metrics - Reporting -", "Reporting successfully finished.");
+					"EMF Quality Assurance - Metrics Reporting -", "Reporting successfully finished.");
 		} catch (EngineException e) {
 			e.printStackTrace();
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
-					"EMF Metrics - Reporting -", "Reporting not finished successfully.");
+					"EMF Quality Assurance - Metrics Reporting -", "Reporting not finished successfully.");
 		}
 		engine.destroy();
 		// end

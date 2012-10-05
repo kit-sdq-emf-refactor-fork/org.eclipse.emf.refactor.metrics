@@ -38,7 +38,7 @@ public class ReportingWizardPage extends WizardPage {
 	public ReportingWizardPage(ReportingWizard reportingWizard) {
 		super("DesignWizardPage");
 		this.reportingWizard = reportingWizard;
-		setTitle("EMF Metrics - Reporting -");
+		setTitle("EMF Quality Assurance - Metrics Reporting -");
 		setDescription("Please insert the required informations for reporting your metrics results.");
 	}
 	
@@ -240,7 +240,7 @@ public class ReportingWizardPage extends WizardPage {
 					String name = selected.substring(i + 1);
 					if (name.contains(".")) {
 						String message = "Please insert an output name without file extension!";
-						MessageDialog.openError(getShell(), "EMF Metrics - Reporting -", message);
+						MessageDialog.openError(getShell(), "EMF Quality Assurance - Metrics Reporting -", message);
 						valid = false;
 					} else {
 						valid = true;

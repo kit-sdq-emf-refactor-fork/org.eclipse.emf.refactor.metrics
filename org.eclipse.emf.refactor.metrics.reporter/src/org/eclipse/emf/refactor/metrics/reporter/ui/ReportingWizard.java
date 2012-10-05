@@ -9,7 +9,7 @@ public class ReportingWizard extends Wizard {
 	private ReportingWizardPage page;
 
 	public ReportingWizard(ReportManager metricsReporter) {
-		setWindowTitle("EMF Metrics - Reporting -");
+		setWindowTitle("EMF Quality Assurance - Metrics Reporting -");
 		this.metricsReporter = metricsReporter;
 	}
 	
