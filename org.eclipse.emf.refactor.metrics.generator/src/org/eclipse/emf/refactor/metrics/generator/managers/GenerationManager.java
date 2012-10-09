@@ -84,6 +84,7 @@ public class GenerationManager {
 		} else {
 			templateName = SKELETON_TEMPLATE_CLASS_NAME;
 		}
+		System.out.println("Template: " + templateName);
 		try {
 			generatedCode = generateCode(monitor, templateName, metricInfo);
 		    saveCode(monitor, generatedCode, metricInfo);
@@ -109,6 +110,7 @@ public class GenerationManager {
 		return cpe;
 	}
 	
+	@SuppressWarnings("finally")
 	private static String generateCode(IProgressMonitor monitor, String template, MetricInfo metricInfo) {
 		String templatePath = templateDirectory + template + TEMPLATE_FILE_EXTENSION;
 		ClassLoader classLoader = metricInfo.getClass().getClassLoader();
@@ -119,10 +121,12 @@ public class GenerationManager {
 		try {
 			result = jetEmitter.generate(subMonitor, new Object[] {metricInfo});
 		} catch (JETException e) {
+			result = e.getMessage();
 			e.printStackTrace();
+		} finally {
+			System.out.println(result);
+			return result;
 		}
-		System.out.println(result);
-		return result;
 	}
 	
 	protected static void saveCode(IProgressMonitor monitor, String content, MetricInfo metricInfo) throws CoreException, JETException {
