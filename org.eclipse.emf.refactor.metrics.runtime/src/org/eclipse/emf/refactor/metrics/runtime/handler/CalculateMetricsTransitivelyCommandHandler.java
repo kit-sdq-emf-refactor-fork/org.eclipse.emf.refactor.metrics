@@ -31,7 +31,7 @@ public class CalculateMetricsTransitivelyCommandHandler implements IHandler {
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setCursor(new Cursor(null,SWT.CURSOR_WAIT));
 		ISelection selection = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().getSelection();
 		List<EObject> context = SelectionManager.getESelection(selection);
-		IProject project = ProjectManager.getActualProject(selection);
+		IProject project = ProjectManager.getActualProject();
 		if (project == null) {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setCursor(oldCursor);
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 

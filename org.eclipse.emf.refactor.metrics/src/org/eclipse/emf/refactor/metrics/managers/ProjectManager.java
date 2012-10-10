@@ -2,7 +2,6 @@ package org.eclipse.emf.refactor.metrics.managers;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -23,7 +22,7 @@ public class ProjectManager {
 	}
 
 	@SuppressWarnings("finally")
-	public static IProject getActualProject(ISelection selection) {
+	public static IProject getActualProject() {
 		IProject actualProject = null;
 		IWorkbenchWindow window = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow();

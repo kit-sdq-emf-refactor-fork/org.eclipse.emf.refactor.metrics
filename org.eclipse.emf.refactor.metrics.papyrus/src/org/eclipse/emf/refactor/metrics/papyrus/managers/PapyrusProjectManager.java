@@ -18,7 +18,7 @@ public class PapyrusProjectManager extends ProjectManager {
 	
 	@SuppressWarnings("finally")
 	public static IProject getActualProject(ISelection selection) {
-		IProject actualProject = ProjectManager.getActualProject(selection);
+		IProject actualProject = ProjectManager.getActualProject();
 		IWorkbenchWindow window = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow();
 		try {
