@@ -6,7 +6,7 @@
       <wizard
             category="org.eclipse.emf.refactor.newwizards.category"
             class="org.eclipse.emf.refactor.metrics.henshin.ui.NewMetricWizardHenshin"
-            icon="icons/newmetric.PNG"
+            icon="icons/metric.PNG"
             id="org.eclipse.emf.refactor.metrics.newwizard"
             name="Metric (specified in Henshin)">
       </wizard>
