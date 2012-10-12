@@ -68,7 +68,7 @@
       <view
             category="org.eclipse.emf.refactor.view.category"
             class="org.eclipse.emf.refactor.metrics.runtime.ui.MetricResultsView"
-            icon="icons/metricresultsview.PNG"
+            icon="icons/metric.PNG"
             id="org.eclipse.emf.refactor.metrics.view"
             name="Metric Results View"
             restorable="true">
