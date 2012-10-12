@@ -145,6 +145,7 @@ public class MetricResultsView extends ViewPart {
 		for (Action action : additionalActions) {	
 			if (toolbarMM.getItems().length != additionalActions.size()+2) {
 				barMM.add(action);
+				barMM.update(true);
 				toolbarMM.add(action);
 				toolbarMM.update(true);
 			}
