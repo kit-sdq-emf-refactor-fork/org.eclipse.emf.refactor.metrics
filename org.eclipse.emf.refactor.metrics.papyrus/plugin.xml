@@ -8,8 +8,8 @@
             allPopups="true"
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu
-               id="org.eclipse.emf.refactor.papyrus.menu"
-               label="EMF Quality Assurance">
+               id="org.eclipse.emf.refactor.runtime.menu"
+               label="EMF Quality Assurance (use existing techniques)">
             <command
                   commandId="org.eclipse.emf.refactor.metrics.papyrus.calculateMetricsOnElementCommand"
                   label="Calculate Configured Metrics (on element)"
@@ -48,6 +48,10 @@
                   </iterate>
                </visibleWhen>
             </command>
+         </menu>
+         <menu
+               id="org.eclipse.emf.refactor.generator.menu"
+               label="EMF Quality Assurance (define new techniques)">
             <command
                   commandId="org.eclipse.emf.refactor.metrics.papyrus.generateNewMetricJavaCommand"
                   label="Generate New Metric (specified in Java)"
@@ -57,12 +61,12 @@
                   <iterate
                         ifEmpty="false">
                      <or>
-                     	<instanceof
-                           value="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
-                     	</instanceof>
-                     	<instanceof
-                           value="org.eclipse.emf.facet.infra.browser.uicore.internal.model.ModelElementItem">
-                     	</instanceof>
+                        <instanceof
+                              value="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+                        </instanceof>
+                        <instanceof
+                              value="org.eclipse.emf.facet.infra.browser.uicore.internal.model.ModelElementItem">
+                        </instanceof>
                      </or>
                   </iterate>
                </visibleWhen>
@@ -76,12 +80,12 @@
                   <iterate
                         ifEmpty="false">
                      <or>
-                     	<instanceof
-                           value="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
-                     	</instanceof>
-                     	<instanceof
-                           value="org.eclipse.emf.facet.infra.browser.uicore.internal.model.ModelElementItem">
-                     	</instanceof>
+                        <instanceof
+                              value="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+                        </instanceof>
+                        <instanceof
+                              value="org.eclipse.emf.facet.infra.browser.uicore.internal.model.ModelElementItem">
+                        </instanceof>
                      </or>
                   </iterate>
                </visibleWhen>

@@ -25,8 +25,8 @@
             allPopups="true"
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu
-               id="org.eclipse.emf.refactor.runtime.menu"
-               label="EMF Quality Assurance">
+               id="org.eclipse.emf.refactor.generator.menu"
+               label="EMF Quality Assurance (define new techniques)">
             <command
                   commandId="org.eclipse.emf.refactor.metrics.generator.generateNewMetricJavaCommand"
                   label="Generate New Metric (specified in Java)"

@@ -9,7 +9,7 @@
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu
                id="org.eclipse.emf.refactor.runtime.menu"
-               label="EMF Quality Assurance">
+               label="EMF Quality Assurance (use existing techniques)">
             <command
                   commandId="org.eclipse.emf.refactor.metrics.runtime.calculateMetricsOnElementCommand"
                   label="Calculate Configured Metrics (on element)"
