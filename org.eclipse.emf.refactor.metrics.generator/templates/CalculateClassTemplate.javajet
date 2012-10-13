@@ -1,4 +1,4 @@
-<%@ jet package="org.eclipse.emf.refactor.metrics" class="HenshinFinderClass"
+<%@ jet package="org.eclipse.emf.refactor.metrics" class="MetricFinderClass"
 imports="org.eclipse.emf.refactor.metrics.generator.core.MetricInfo"%>
 <%MetricInfo info = (MetricInfo) argument; %>
 package <%=info.getPackage()%>;
@@ -8,9 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.refactor.metrics.interfaces.IMetricCalculator;
 import <%=info.getImportPackage()%>.*;
 
-
 public final class <%=info.getClassName()%> implements IMetricCalculator {
-
 		
 	private List<EObject> context; 
 		
