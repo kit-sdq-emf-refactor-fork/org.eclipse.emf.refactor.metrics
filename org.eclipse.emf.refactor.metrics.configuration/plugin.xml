@@ -10,14 +10,5 @@
             name="Metrics configuration">
       </page>
    </extension>
-      <extension
-         point="org.eclipse.ui.propertyPages">
-      <page
-            category="org.eclipse.emf.refactor.propertypage"
-            class="org.eclipse.emf.refactor.metrics.configuration.ui.MetricsConfigurationPage"
-            id="org.eclipse.emf.refactor.metrics.configuration"
-            name="Metrics configuration">
-      </page>
-   </extension>
 
 </plugin>
