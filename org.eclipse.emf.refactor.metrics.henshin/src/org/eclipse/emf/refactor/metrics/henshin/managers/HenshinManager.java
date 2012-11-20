@@ -13,12 +13,10 @@ import org.eclipse.emf.henshin.interpreter.impl.EngineImpl;
 import org.eclipse.emf.henshin.interpreter.impl.MatchImpl;
 import org.eclipse.emf.henshin.interpreter.impl.RuleApplicationImpl;
 import org.eclipse.emf.henshin.interpreter.util.InterpreterUtil;
-import org.eclipse.emf.henshin.interpreter.util.ModelHelper;
-import org.eclipse.emf.henshin.model.Rule;
+import org.eclipse.emf.henshin.model.Module;
 import org.eclipse.emf.henshin.model.Parameter;
-import org.eclipse.emf.henshin.model.TransformationSystem;
+import org.eclipse.emf.henshin.model.Rule;
 
-@SuppressWarnings("deprecation")
 public class HenshinManager {
 
 	private final static String MAIN_RULE = "mainRule";
@@ -29,9 +27,8 @@ public class HenshinManager {
 		EGraph graph = new EGraphImpl();
 		graph.addTree(root);
 		Engine engine = new EngineImpl();
-		TransformationSystem transformationSystem = 
-				(TransformationSystem) ModelHelper.loadFile(transformationPath);
-		Rule rule = (Rule) transformationSystem.findRuleByName(MAIN_RULE);
+		Module module = (Module) HenshinFileManager.loadFile(transformationPath);
+		Rule rule = (Rule) module.getUnit(MAIN_RULE);
 		Match prematch = new MatchImpl(rule);
 		for (Parameter par : rule.getParameters()) {
 			if (par.getName().equals(CONTEXT)) {
