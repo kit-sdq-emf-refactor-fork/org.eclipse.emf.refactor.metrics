@@ -29,6 +29,7 @@
                label="EMF Quality Assurance (define new techniques)">
             <command
                   commandId="org.eclipse.emf.refactor.metrics.generator.generateNewMetricJavaCommand"
+                  icon="icons/metric.PNG"
                   label="Generate New Metric (specified in Java)"
                   style="push">
                <visibleWhen
@@ -43,6 +44,7 @@
             </command>
             <command
                   commandId="org.eclipse.emf.refactor.metrics.generator.generateNewMetricCompositeCommand"
+                  icon="icons/metric.PNG"
                   label="Generate New Metric (compositional)"
                   style="push">
                <visibleWhen

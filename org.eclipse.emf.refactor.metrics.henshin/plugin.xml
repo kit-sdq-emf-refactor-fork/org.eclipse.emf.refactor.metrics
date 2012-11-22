@@ -22,6 +22,7 @@
                label="EMF Quality Assurance (define new techniques)">
             <command
                   commandId="org.eclipse.emf.refactor.metrics.henshin.generateNewMetricHenshinCommand"
+                  icon="icons/metric.PNG"
                   label="Generate New Metric (specified in Henshin)"
                   style="push">
                <visibleWhen
