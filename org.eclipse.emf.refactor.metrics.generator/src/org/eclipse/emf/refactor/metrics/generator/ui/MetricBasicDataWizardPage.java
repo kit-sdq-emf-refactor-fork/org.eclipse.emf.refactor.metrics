@@ -81,10 +81,16 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 			if (nsURI != null && ! nsURI.isEmpty()) {
 				EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
 				if (ePackage != null) {
-					importPackage = ePackage.getClass().getPackage().getName();
+					importPackage = ePackage.getClass().getPackage().getName();					
+					System.out.println("nsURI: " + nsURI);
+					System.out.println("ePackage: " + ePackage);					
 					if (importPackage.endsWith(".impl")) {
 						int length = importPackage.length();
 						importPackage = importPackage.substring(0, length-5);
+					}
+					if (importPackage.endsWith(".internal")) {
+						int length = importPackage.length();
+						importPackage = importPackage.substring(0, length-9);
 					}
 					System.out.println("importPackage: " + importPackage);
 					File jarFile;
@@ -236,6 +242,10 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 				if (importPackage.endsWith(".impl")) {
 					int length = importPackage.length();
 					importPackage = importPackage.substring(0, length-5);
+				}
+				if (importPackage.endsWith(".internal")) {
+					int length = importPackage.length();
+					importPackage = importPackage.substring(0, length-9);
 				}
 				System.out.println("importPackage: " + importPackage);
 				File jarFile;
