@@ -2,7 +2,9 @@ package org.eclipse.emf.refactor.metrics.generator.ui;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -110,13 +112,20 @@ public class MetricBasicDataWizardPage extends WizardPage implements Listener {
 						e.printStackTrace();
 					} finally {	
 						contextCombo.removeAll();
-						Object[] eObjectNames = new Object[ePackage.eContents().size()];
-						for (int i = 0; i < eObjectNames.length; i++) {
+						
+						List<Object> namedElements = new ArrayList<Object>();
+						for (int i = 0; i < ePackage.eContents().size(); i++) {
 							EObject eObject = ePackage.eContents().get(i);
 							if (eObject instanceof ENamedElement) {
-								eObjectNames[i] = ((ENamedElement) ePackage.eContents().get(i)).getName();
+								namedElements.add(eObject);								
 							}
-						}					
+						}		
+						
+						Object[] eObjectNames = new Object[namedElements.size()];
+						for (int i = 0; i < eObjectNames.length; i++) {
+							eObjectNames[i] = ((ENamedElement) namedElements.get(i)).getName();
+						}
+						
 				        Arrays.sort(eObjectNames);
 						for(Object object : eObjectNames){
 							contextCombo.add((String)object);
