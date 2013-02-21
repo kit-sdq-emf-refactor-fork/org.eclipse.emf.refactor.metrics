@@ -87,7 +87,7 @@ public class XMLResultsManager extends XMLManager {
 	private static String getContextValue(EObject eObject) {
 		String ret = "";
 		for(EAttribute attribute : eObject.eClass().getEAllAttributes()){
-			if (attribute.getName().equals("name")) {
+			if (attribute.getName().equalsIgnoreCase("name")) {
 				ret = (String) eObject.eGet(attribute);
 				break;
 			}
