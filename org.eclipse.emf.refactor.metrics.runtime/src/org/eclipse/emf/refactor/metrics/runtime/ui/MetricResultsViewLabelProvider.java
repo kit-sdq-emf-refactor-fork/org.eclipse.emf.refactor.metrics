@@ -18,9 +18,9 @@ class MetricResultsViewLabelProvider extends LabelProvider implements ITableLabe
 
 	public String getColumnText(Object obj, int index) {
 		switch(index){
-		case 0:
+		case 4:
 			return ((Result)obj).getTimeStamp();
-		case 1:
+		case 0:
 			EObject contextElement = ((Result)obj).getContext().get(0);
 			String name = getEObjectLabel(contextElement);
 			String contextString = ((Result)obj).getMetric().getContext();
@@ -30,11 +30,11 @@ class MetricResultsViewLabelProvider extends LabelProvider implements ITableLabe
 				return s[s.length -1] + " " + name;
 			else
 				return name;
-		case 2:
+		case 1:
 			return ((Result)obj).getMetric().getName();
-		case 3:
+		case 2:
 			return ((Result)obj).getMetric().getDescription();
-		case 4:
+		case 3:
 			Double value = ((Result)obj).getResultValue();
 			if (value.isNaN()) return "NaN";
 			BigDecimal myDec = new BigDecimal(value);

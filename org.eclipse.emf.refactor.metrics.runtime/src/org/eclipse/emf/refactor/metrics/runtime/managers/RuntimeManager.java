@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.refactor.metrics.configuration.core.Configuration;
 import org.eclipse.emf.refactor.metrics.configuration.managers.ConfigurationManager;
+import org.eclipse.emf.refactor.metrics.interfaces.IHighlighting;
 import org.eclipse.emf.refactor.metrics.runtime.core.MetricCalculator;
 import org.eclipse.emf.refactor.metrics.runtime.core.Result;
 import org.eclipse.emf.refactor.metrics.runtime.ui.MetricResultsView;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
 public class RuntimeManager {
 	
@@ -25,6 +26,7 @@ public class RuntimeManager {
 	private static LinkedList<Result> resultsViewInput;
 	private static TableViewer resultsViewer = null;
 	private static List<Action> additionalActions = new ArrayList<Action>();
+	private static List<IHighlighting> additionalHighlightings = new ArrayList<IHighlighting>();
 	
 	private static RuntimeManager instance;
 	
@@ -47,6 +49,16 @@ public class RuntimeManager {
 			additionalActions.add(action);
 		} else {
 			additionalActions.add(action);
+		}
+		return instance;
+	}
+	
+	public static RuntimeManager getInstance(IHighlighting highlighting) {
+		if (instance == null) {
+			instance = new RuntimeManager();
+			additionalHighlightings.add(highlighting);
+		} else {
+			additionalHighlightings.add(highlighting);
 		}
 		return instance;
 	}
@@ -115,6 +127,7 @@ public class RuntimeManager {
 		try{
 			page.showView(MetricResultsView.ID);
 			setAdditionalActionsToView(getMetricsView());
+			setAdditionalHightightingsToView(getMetricsView());
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
@@ -136,6 +149,7 @@ public class RuntimeManager {
 		MetricResultsView view = getMetricsView();
 		if (view != null) {
 			setAdditionalActionsToView(view);
+			setAdditionalHightightingsToView(getMetricsView());
 			return true;
 		}
 		return false;
@@ -147,5 +161,12 @@ public class RuntimeManager {
 			view.addAction(action);
 		}
 		view.addActionsToMenu();
+	}
+	
+	private static void setAdditionalHightightingsToView(MetricResultsView view) {
+		for (IHighlighting highlighting : additionalHighlightings) {
+			System.out.println("RuntimeManager: add highlighting '" + highlighting + "' to view!");
+			view.addHighlighting(highlighting);
+		}
 	}
 }

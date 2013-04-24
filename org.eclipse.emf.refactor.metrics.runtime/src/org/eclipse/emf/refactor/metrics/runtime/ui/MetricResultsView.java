@@ -3,6 +3,13 @@ package org.eclipse.emf.refactor.metrics.runtime.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.ui.viewer.IViewerProvider;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.refactor.metrics.interfaces.IHighlighting;
+import org.eclipse.emf.refactor.metrics.runtime.core.Result;
 import org.eclipse.emf.refactor.metrics.runtime.managers.RuntimeManager;
 import org.eclipse.emf.refactor.metrics.runtime.ui.actions.ClearAction;
 import org.eclipse.emf.refactor.metrics.runtime.ui.actions.SaveAction;
@@ -10,14 +17,24 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
@@ -45,6 +62,7 @@ public class MetricResultsView extends ViewPart {
 	private SaveAction saveAction;
 	private Action clearAction;
 	private List<Action> additionalActions = new ArrayList<Action>();
+	private List<IHighlighting> additionalHighlightings = new ArrayList<IHighlighting>();
 
 	public MetricResultsView() { }
 	
@@ -66,31 +84,84 @@ public class MetricResultsView extends ViewPart {
 				| SWT.V_SCROLL);
 		final Table table = viewer.getTable();
 		RuntimeManager.setResultsViewer(viewer);
-		column = new TableColumn(table, SWT.LEFT);
-		column.setText(TIME_COLUMN_LABEL);
-		column.setWidth(150);
-		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		
 		column = new TableColumn(table, SWT.LEFT);
 		column.setText(CONTEXT_COLUMN_LABEL);
 		column.setWidth(200);
 		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		
 		column = new TableColumn(table, SWT.LEFT);
 		column.setText(METRIC_COLUMN_LABEL);
-		column.setWidth(200);
+		column.setWidth(120);
 		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		
 		column = new TableColumn(table, SWT.LEFT);
 		column.setText(DESCRIPTION_COLUMN_LABEL);
-		column.setWidth(300);
+		column.setWidth(360);
 		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		
 		column = new TableColumn(table, SWT.LEFT);
 		column.setText(RESULT_COLUMN_LABEL);
-		column.setWidth(50);
+		column.setWidth(70);
 		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		
+		column = new TableColumn(table, SWT.LEFT);
+		column.setText(TIME_COLUMN_LABEL);
+		column.setWidth(150);
+		column.addListener(SWT.Selection, new ColumnSortListener(column));
+		
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		
 		viewer.setContentProvider(new MetricResultsViewContentProvider());
 		viewer.setLabelProvider(new MetricResultsViewLabelProvider());
 		viewer.setInput(RuntimeManager.getResultsViewInput());
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				if(event.getSelection().isEmpty()) {
+					return;
+			    }
+				IWorkbenchWindow workbenchWindow= PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+				IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
+				if (event.getSelection() instanceof IStructuredSelection) {
+					StructuredSelection ss = (StructuredSelection) event.getSelection();
+					Object selection = ss.getFirstElement();
+					doAdditionalHighlightings(selection);
+				}
+				System.out.println("editorPart: " + editorPart);
+				System.out.println("editorPart.class: " + editorPart.getClass());
+				if(editorPart != null && editorPart instanceof IViewerProvider) {
+					setSelectionInModel((IViewerProvider)editorPart, (IStructuredSelection)event.getSelection());
+				}				
+			}
+			
+			private void setSelectionInModel(IViewerProvider provider, IStructuredSelection selection){
+				ArrayList<EObject> eObjectList = new ArrayList<EObject>();
+				for(Object selectedObject : selection.toList()){
+					if(selectedObject instanceof Result){
+						for(EObject currentEObject : ((Result) selectedObject).getContext()) {
+							EObject modelInstanceObject = getModelObjectInstance(provider, currentEObject);
+							eObjectList.add(modelInstanceObject);
+						}
+					}
+				}
+				provider.getViewer().setSelection(new StructuredSelection(eObjectList));				
+			}
+			
+			private EObject getModelObjectInstance(IViewerProvider provider, EObject eObject) {
+				Viewer viewer = provider.getViewer();
+				TreeViewer treeViewer = (TreeViewer)viewer;
+				Tree tree = treeViewer.getTree();
+				TreeItem treeItem = tree.getItem(0);
+				Resource o = (Resource)treeItem.getData();
+				ResourceSet set = o.getResourceSet();
+				EObject ob = set.getEObject(EcoreUtil.getURI(eObject), true);
+				return ob;
+			}
+			
+		});
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(),"EMFMetrics.viewer");
 		makeActions();
 //		hookContextMenu();
@@ -181,6 +252,16 @@ public class MetricResultsView extends ViewPart {
 		@Override
 		public void handleEvent(Event event) {
 			orderByColumn(column);		
+		}
+	}
+
+	public void addHighlighting(IHighlighting highlighting) {
+		additionalHighlightings.add(highlighting);
+	}
+	
+	protected void doAdditionalHighlightings(Object selection) {
+		for (IHighlighting highlighting : additionalHighlightings) {
+			highlighting.highlight(selection);
 		}
 	}
 
