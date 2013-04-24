@@ -127,8 +127,7 @@ public class MetricResultsView extends ViewPart {
 				IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
 				if (event.getSelection() instanceof IStructuredSelection) {
 					StructuredSelection ss = (StructuredSelection) event.getSelection();
-					Object selection = ss.getFirstElement();
-					doAdditionalHighlightings(selection);
+					doAdditionalHighlightings(ss);
 				}
 				System.out.println("editorPart: " + editorPart);
 				System.out.println("editorPart.class: " + editorPart.getClass());

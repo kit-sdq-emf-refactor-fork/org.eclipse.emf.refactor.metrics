@@ -7,7 +7,8 @@ import org.eclipse.swt.graphics.Color;
 
 public class PapyrusDecorationFigure extends Figure {
 	
-	private static final Color NICE_RED = new Color(null, 232, 72, 72);
+//	private static final Color NICE_GREEN = new Color(null, 72, 232, 232);
+	private static final Color NICE_GREEN = new Color(null, 77, 188, 77);
 
 	public PapyrusDecorationFigure(){
 		setLayoutManager(new ToolbarLayout());
@@ -16,7 +17,7 @@ public class PapyrusDecorationFigure extends Figure {
 	
 	@Override
 	public void paint(Graphics graphics) {
-		graphics.setForegroundColor(NICE_RED);
+		graphics.setForegroundColor(NICE_GREEN);
 		graphics.setLineWidth(4);
 		graphics.drawRectangle(getClientArea());
 		super.paint(graphics);

@@ -145,15 +145,16 @@
       <decoratorProvider
             class="org.eclipse.emf.refactor.metrics.papyrus.ui.PapyrusDecoratorProvider">
          <Priority
-               name="Lowest">
+               name="Low">
          </Priority>
          <object
                class="org.eclipse.gmf.runtime.notation.View(org.eclipse.gmf.runtime.notation)"
-               id="NODE">
+               id="org.eclipse.emf.refactor.metrics.papyrus.decorator">
          </object>
          <context
-               decoratorTargets="NODE">
+               decoratorTargets="org.eclipse.emf.refactor.metrics.papyrus.decorator">
          </context>
       </decoratorProvider>
    </extension>
+   
 </plugin>

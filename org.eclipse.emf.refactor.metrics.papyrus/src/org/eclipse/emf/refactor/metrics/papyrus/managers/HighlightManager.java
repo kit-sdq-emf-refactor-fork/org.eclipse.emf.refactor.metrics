@@ -2,6 +2,7 @@ package org.eclipse.emf.refactor.metrics.papyrus.managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecorator;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.viewers.StructuredSelection;
 
 
 public class HighlightManager {
@@ -38,8 +40,16 @@ public class HighlightManager {
 		// clear former selected eObjects
 		selected.clear();
 		// set selected eObjects from selection
-		if (selection instanceof Result) {			
-			selected.addAll(((Result) selection).getContext());
+		if (selection instanceof StructuredSelection) {		
+			StructuredSelection ss = (StructuredSelection) selection;
+			@SuppressWarnings("unchecked")
+			Iterator<Object> it = ss.iterator();
+			while (it.hasNext()) {
+				Object o = it.next();
+				if (o instanceof Result) {
+					selected.addAll(((Result) o).getContext());
+				}
+			}
 		}
 		// refresh each corresponding decorator
 		for (IDecorator decorator : decorators) {
