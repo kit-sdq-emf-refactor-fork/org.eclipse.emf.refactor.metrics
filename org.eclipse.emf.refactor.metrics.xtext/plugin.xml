@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+	<menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               id="org.eclipse.emf.refactor.runtime.menu"
+               label="EMF Quality Assurance (use existing techniques)">
+            <command
+                  commandId="org.eclipse.emf.refactor.metrics.xtext.calculateMetricsOnElementCommand"
+                  label="Calculate Configured Metrics (on element)"
+                  style="push">
+               <visibleWhen
+                  checkEnabled="true">
+               <iterate
+                     ifEmpty="false">
+                  <instanceof
+                        value="org.eclipse.jface.text.TextSelection">
+                  </instanceof>
+               </iterate>
+            </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.emf.refactor.metrics.xtext.calculateMetricsTransitivelyCommand"
+                  label="Calculate Configured Metrics (on model)"
+                  style="push">
+               <visibleWhen
+                  checkEnabled="true">
+               <iterate
+                     ifEmpty="false">
+                  <instanceof
+                        value="org.eclipse.jface.text.TextSelection">
+                  </instanceof>
+               </iterate>
+            </visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.eclipse.emf.refactor.metrics.xtext.calculateMetricsOnElementCommand"
+            name="CalculateMetricsOnElementCommand">
+      </command>
+      <command
+            id="org.eclipse.emf.refactor.metrics.xtext.calculateMetricsTransitivelyCommand"
+            name="CalculateMetricsTransitivelyCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.emf.refactor.metrics.xtext.handler.CalculateMetricsOnElementCommandHandler"
+            commandId="org.eclipse.emf.refactor.metrics.xtext.calculateMetricsOnElementCommand">
+      </handler>
+      <handler
+            class="org.eclipse.emf.refactor.metrics.xtext.handler.CalculateMetricsTransitivelyCommandHandler"
+            commandId="org.eclipse.emf.refactor.metrics.xtext.calculateMetricsTransitivelyCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.eclipse.emf.refactor.metrics.xtext.XtextStartup">
+      </startup>
+   </extension>
+
+</plugin>
