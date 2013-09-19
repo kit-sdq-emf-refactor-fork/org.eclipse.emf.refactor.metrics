@@ -25,6 +25,8 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
@@ -112,6 +114,17 @@ public class MetricResultsView extends ViewPart {
 		
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		table.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				doAdditionalHighlightings(null);
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {				
+			}
+		});
 		
 		viewer.setContentProvider(new MetricResultsViewContentProvider());
 		viewer.setLabelProvider(new MetricResultsViewLabelProvider());
@@ -120,6 +133,7 @@ public class MetricResultsView extends ViewPart {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
+				System.out.println("===>>> event: " + event);
 				if(event.getSelection().isEmpty()) {
 					return;
 			    }

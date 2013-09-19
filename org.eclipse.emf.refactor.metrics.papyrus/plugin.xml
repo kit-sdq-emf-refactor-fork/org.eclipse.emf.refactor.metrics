@@ -20,6 +20,7 @@
                label="EMF Quality Assurance (use existing techniques)">
             <command
                   commandId="org.eclipse.emf.refactor.metrics.papyrus.calculateMetricsOnElementCommand"
+                  icon="icons/metric.PNG"
                   label="Calculate Configured Metrics (on element)"
                   style="push">
                <visibleWhen 
@@ -39,6 +40,7 @@
             </command>
             <command
                   commandId="org.eclipse.emf.refactor.metrics.papyrus.calculateMetricsTransitivelyCommand"
+                  icon="icons/metric.PNG"
                   label="Calculate Configured Metrics (transitively)"
                   style="push">
                <visibleWhen
@@ -62,6 +64,7 @@
                label="EMF Quality Assurance (define new techniques)">
             <command
                   commandId="org.eclipse.emf.refactor.metrics.papyrus.generateNewMetricJavaCommand"
+                  icon="icons/metric.PNG"
                   label="Generate New Metric (specified in Java)"
                   style="push">
                <visibleWhen
@@ -81,6 +84,7 @@
             </command>
             <command
                   commandId="org.eclipse.emf.refactor.metrics.papyrus.generateNewMetricCompositeCommand"
+                  icon="icons/metric.PNG"
                   label="Generate New Metric (compositional)"
                   style="push">
                <visibleWhen
