@@ -10,7 +10,7 @@ import org.eclipse.emf.refactor.metrics.managers.MetricManager;
  * 
  * @author Pawel Stepien
  */
-public class Metric {
+public class Metric implements Comparable<Metric> {
 
 	private String id;
 	private String name;
@@ -104,5 +104,17 @@ public class Metric {
 				return metric;
 		}
 		return null;
+	}
+
+	@Override
+	public int compareTo(Metric metric) {
+		if(this.equals(metric)) {
+			return 0;
+		}
+		if(this.getName().equals(metric.getName())) {
+			return 0;
+		} else {
+		    return this.getName().compareTo(metric.getName());	
+		}
 	}
 }

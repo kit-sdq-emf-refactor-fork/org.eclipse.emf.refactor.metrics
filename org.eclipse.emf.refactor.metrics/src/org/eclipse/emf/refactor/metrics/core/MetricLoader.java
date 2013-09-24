@@ -24,6 +24,7 @@ public class MetricLoader {
 				e.printStackTrace();
 			}
 		}
+		java.util.Collections.sort(metrics);
 		return metrics;
 	}
 
