@@ -69,14 +69,19 @@ public class XMLResultsManager extends XMLManager {
 			metricDescription.setTextContent(result.getMetric().getDescription());
 			resultEntry.appendChild(metricDescription);			
 			Element resultValue = doc.createElement("resultValue");
-			DecimalFormat df = new DecimalFormat( "0.00" );
+			DecimalFormat df = new DecimalFormat("##.##");
 			String valueStr = "";
 			Double value = result.getResultValue();
 			if (value.equals(Double.NaN)) {
 				valueStr = "NaN";
 			} else {
-				valueStr = df.format(result.getResultValue());
+				Double doubleToString = Math.round(result.getResultValue()*100)/100.0;
+				valueStr = Double.toString(doubleToString);
+//				valueStr = df.format(result.getResultValue());
+				
+//				valueStr = String.format("%.2f", result.getResultValue());
 			}
+			System.out.println("))) value: " + valueStr);
 			resultValue.setTextContent(valueStr);
 			resultEntry.appendChild(resultValue);
 			context.appendChild(resultEntry);
