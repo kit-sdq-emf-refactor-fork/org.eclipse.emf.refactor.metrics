@@ -10,7 +10,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.refactor.metrics.generator.core.MetricInfo;
 import org.eclipse.emf.refactor.metrics.generator.interfaces.INewMetricWizard;
-import org.eclipse.emf.refactor.metrics.generator.managers.GenerationManager;
+import org.eclipse.emf.refactor.metrics.generator.managers.MetricsGenerationManager;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -20,6 +20,7 @@ import org.eclipse.ui.IWorkbench;
 
 public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetricWizard {
 	
+	private static final String ORG_ECLIPSE_PDE_PLUGIN_NATURE = "org.eclipse.pde.PluginNature";
 	private final String WINDOW_TITLE = "New Metric";
 	private MetricBasicDataWizardPage basicDataPage;
 	private String name, id, description, metamodel, context, jar;
@@ -60,8 +61,8 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 		try{
 			getContainer().run(true, true, new IRunnableWithProgress(){
 				public void run(IProgressMonitor monitor)throws InvocationTargetException, InterruptedException{
-					GenerationManager.getInstance();
-					GenerationManager.createNewMetric(monitor, getMetricInfo(), targetProject);
+					MetricsGenerationManager.getInstance();
+					MetricsGenerationManager.createNewMetric(monitor, getMetricInfo(), targetProject);
 				}
 			});
 		}
@@ -83,7 +84,7 @@ public class NewMetricWizardJava extends Wizard implements INewWizard, INewMetri
 			if (project.isOpen()) {
 				IProjectNature nature = null;
 				try {
-					nature = project.getNature("org.eclipse.pde.PluginNature");
+					nature = project.getNature(ORG_ECLIPSE_PDE_PLUGIN_NATURE);
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}

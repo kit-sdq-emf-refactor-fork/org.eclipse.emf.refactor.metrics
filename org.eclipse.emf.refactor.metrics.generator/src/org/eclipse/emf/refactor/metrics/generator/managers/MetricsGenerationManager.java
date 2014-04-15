@@ -26,9 +26,9 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.JavaCore;
 import org.osgi.framework.Bundle;
 
-public class GenerationManager {
+public class MetricsGenerationManager {
 	
-	private static GenerationManager instance;
+	private static MetricsGenerationManager instance;
 	private static final String COMPOSITE_TEMPLATE_CLASS_NAME = "CompositeCalculateClassTemplate";
 	private static final String SKELETON_TEMPLATE_CLASS_NAME = "CalculateClassTemplate";
 	protected static final  String TEMPLATE_DIR = "/templates";
@@ -40,15 +40,15 @@ public class GenerationManager {
 	protected static String templateDirectory;
 	protected static List<IClasspathEntry> classpathEntries;
 	
-	protected GenerationManager() {
+	protected MetricsGenerationManager() {
 		templateDirectory = setTemplateDirectory();
 		classpathEntries = setClassPathEntries();
 		System.out.println("GenerationManager initialized!");
 	}
 	
-	public static GenerationManager getInstance() {
+	public static MetricsGenerationManager getInstance() {
 		if (instance == null) {
-			instance = new GenerationManager();
+			instance = new MetricsGenerationManager();
 		}
 		return instance;
 	}

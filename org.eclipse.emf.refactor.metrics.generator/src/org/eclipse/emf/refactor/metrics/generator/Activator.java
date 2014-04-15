@@ -1,6 +1,6 @@
 package org.eclipse.emf.refactor.metrics.generator;
 
-import org.eclipse.emf.refactor.metrics.generator.managers.GenerationManager;
+import org.eclipse.emf.refactor.metrics.generator.managers.MetricsGenerationManager;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -28,7 +28,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		GenerationManager.getInstance();
+		MetricsGenerationManager.getInstance();
 	}
 
 	/*
